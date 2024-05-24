@@ -297,74 +297,74 @@ color colorAxiSecondary		                = #282424           // AxiSecondary
 var grpSmc		= " ═══ Día ═══ "
 
 //  ═══  Session Asia  ═══
-show_sesasia            = input(true, 'Asia Session',           group = 'Asia Session')
-show_Startsesasia       = input(false, 'Asia Start Session',    group = 'Asia Session')
-sesasia_ses             = input.session('2300-0600', '',        group = 'Asia Session',         inline = 'sessAsia')
-sesasia_color           = input.color(#8bbcfc, 'Color',         group = 'Asia Session',         inline = 'sessAsia')
+show_sesasia            = input(true,                   title = 'Asia Session',                 group = 'Asia Session')
+show_Startsesasia       = input(false,                  title = 'Asia Start Session',           group = 'Asia Session')
+sesasia_ses             = input.session('2300-0600',    title = '',                             group = 'Asia Session',         inline = 'sessAsia')
+sesasia_color           = input.color(#8bbcfc,          title = 'Color',                        group = 'Asia Session',         inline = 'sessAsia')
 sesasia_text            = 'Asia'
 
 //  ═══  Session Sydney  ═══
-show_sesSydney          = input(true, 'Sydney Session',         group = 'Sydney Session') 
-show_StartsesSydney     = input(false, 'Sydney Start Session',  group = 'Sydney Session')
-sesSydney_ses           = input.session('2300-0500', '',        group = 'Sydney Session',       inline = 'sessSydney')
-sesSydney_color         = input.color(#F0B884, 'Color',         group = 'Sydney Session',       inline = 'sessSydney')
+show_sesSydney          = input(true,                   title = 'Sydney Session',               group = 'Sydney Session') 
+show_StartsesSydney     = input(false,                  title = 'Sydney Start Session',         group = 'Sydney Session')
+sesSydney_ses           = input.session('2300-0500',    title = '',                             group = 'Sydney Session',       inline = 'sessSydney')
+sesSydney_color         = input.color(#F0B884,          title = 'Color',                        group = 'Sydney Session',       inline = 'sessSydney')
 sesSydney_text          = 'Sydney'
 
 //  ═══  Session Tokyo  ═══
-show_sesTokyo           = input(true, 'Tokyo Session',          group = 'Tokyo Session') 
-show_StartsesTokyo      = input(false, 'Tokyo Start Session',   group = 'Tokyo Session')
-sesTokyo_ses            = input.session('0000-0600', '',        group = 'Tokyo Session',        inline = 'sessTokyo')
-sesTokyo_color          = input.color(#0CC1C0, 'Color',         group = 'Tokyo Session',        inline = 'sessTokyo')
+show_sesTokyo           = input(true,                   title = 'Tokyo Session',                group = 'Tokyo Session') 
+show_StartsesTokyo      = input(false,                  title = 'Tokyo Start Session',          group = 'Tokyo Session')
+sesTokyo_ses            = input.session('0000-0600',    title = '',                             group = 'Tokyo Session',        inline = 'sessTokyo')
+sesTokyo_color          = input.color(#0CC1C0,          title = 'Color',                        group = 'Tokyo Session',        inline = 'sessTokyo')
 sesTokyo_text           = 'Tokyo'
 
 //  ═══  Session Shanghai  ═══
-show_sesShanghai        = input(true, 'Shanghai Session',       group = 'Shanghai Session') 
-show_StartsesShanghai   = input(false, 'Shanghai Start Sess',   group = 'Shanghai Session') 
-sesShanghai_ses         = input.session('0130-0657', '',        group = 'Shanghai Session',     inline = 'sessShanghai')
-sesShanghai_color       = input.color(#ea1616, 'Color',         group = 'Shanghai Session',     inline = 'sessShanghai')
+show_sesShanghai        = input(true,                   title = 'Shanghai Session',             group = 'Shanghai Session') 
+show_StartsesShanghai   = input(false,                  title = 'Shanghai Start Sess',          group = 'Shanghai Session') 
+sesShanghai_ses         = input.session('0130-0657',    title = '',                             group = 'Shanghai Session',     inline = 'sessShanghai')
+sesShanghai_color       = input.color(#ea1616,          title = 'Color',                        group = 'Shanghai Session',     inline = 'sessShanghai')
 sesShanghai_text        = 'Shanghai'
 
 //  ═══  Session Europe  ═══
-show_sesEuro            = input(true, 'Europe Session',         group = 'Europe Session') 
-show_StartsesEuro       = input(true, 'Europe Start Session',   group = 'Europe Session') 
-sesEuro_ses             = input.session('0700-1630', '',        group = 'Europe Session',       inline = 'sessEuro')
-sesEuro_color           = input.color(#BBE8B5, 'Color',         group = 'Europe Session',       inline = 'sessEuro')
+show_sesEuro            = input(true,                   title = 'Europe Session',               group = 'Europe Session') 
+show_StartsesEuro       = input(true,                   title = 'Europe Start Session',         group = 'Europe Session') 
+sesEuro_ses             = input.session('0700-1630',    title = '',                             group = 'Europe Session',       inline = 'sessEuro')
+sesEuro_color           = input.color(#BBE8B5,          title = 'Color',                        group = 'Europe Session',       inline = 'sessEuro')
 sesEuro_text            = 'Europe'
 
 //  ═══  Session Europe London  ═══
-show_seslondon          = input(true, 'London Session',         group = 'London Session') 
-show_Startseslondon     = input(false, 'London Start Session',  group = 'London Session')
-seslondon_ses           = input.session('0800-1630', '',        group = 'London Session',       inline = 'sessLondon')
-seslondon_color         = input.color(#ACBBE8, 'Color',         group = 'London Session',       inline = 'sessLondon')
+show_seslondon          = input(true,                   title = 'London Session',               group = 'London Session') 
+show_Startseslondon     = input(false,                  title = 'London Start Session',         group = 'London Session')
+seslondon_ses           = input.session('0800-1630',    title = '',                             group = 'London Session',       inline = 'sessLondon')
+seslondon_color         = input.color(#ACBBE8,          title = 'Color',                        group = 'London Session',       inline = 'sessLondon')
 seslondon_text          = 'London'
 
 //  ═══  Session New York  ═══
-show_sesNewyork         = input(true, 'Newyork Session',        group = 'New York Session') 
-show_StartsesNewyork    = input(true, 'Newyork Start Session',  group = 'New York Session') 
-sesNewyork_ses          = input.session('1300-2200', '',        group = 'New Yokr Session',     inline = 'sessNewyork')
-sesNewyork_color        = input.color(#C5ACE8, 'Color',         group = 'New Yokr Session',     inline = 'sessNewyork')
+show_sesNewyork         = input(true,                   title = 'Newyork Session',              group = 'New York Session') 
+show_StartsesNewyork    = input(true,                   title = 'Newyork Start Session',        group = 'New York Session') 
+sesNewyork_ses          = input.session('1300-2200',    title = '',                             group = 'New Yokr Session',     inline = 'sessNewyork')
+sesNewyork_color        = input.color(#C5ACE8,          title = 'Color',                        group = 'New Yokr Session',     inline = 'sessNewyork')
 sesNewyork_text         = 'New York'
 
 //  ═══  Session New York NISE  ═══
-show_sesNYSE            = input(true, 'NYSE Session',           group = 'NYSE Session') 
-show_StartsesNYSE       = input(false, 'NYSE Start Session',    group = 'NYSE Session') 
-sesNYSE_ses             = input.session('1430-2200', '',        group = 'NYSE Session',         inline = 'sessNYSE')
-sesNYSE_color           = input.color(#87c2d4, 'Color',         group = 'NYSE Session',         inline = 'sessNYSE')
+show_sesNYSE            = input(true,                   title = 'NYSE Session',                 group = 'NYSE Session') 
+show_StartsesNYSE       = input(false,                  title = 'NYSE Start Session',           group = 'NYSE Session') 
+sesNYSE_ses             = input.session('1430-2200',    title = '',                             group = 'NYSE Session',         inline = 'sessNYSE')
+sesNYSE_color           = input.color(#87c2d4,          title = 'Color',                        group = 'NYSE Session',         inline = 'sessNYSE')
 sesNYSE_text            = 'NYSE'
 
 //Info Table
-Show_Info_Table = input(true, 'Info Table', group   = 'Table')
+Show_Info_Table         = input(true, 'Info Table',             group = 'Table')
 
 
 //zones
-On_sesasia = math.sign(nz(time(timeframe.period, sesasia_ses, 'UTC+0')))
-On_sesEuro = math.sign(nz(time(timeframe.period, sesEuro_ses, 'UTC+0')))
-On_sesTokyo = math.sign(nz(time(timeframe.period, sesTokyo_ses, 'UTC+0')))
-On_sesShanghai = math.sign(nz(time(timeframe.period, sesShanghai_ses, 'UTC+0')))
-On_seslondon = math.sign(nz(time(timeframe.period, seslondon_ses, 'UTC+0')))
-On_sesNewyork = math.sign(nz(time(timeframe.period, sesNewyork_ses, 'UTC+0')))
-On_sesNYSE = math.sign(nz(time(timeframe.period, sesNYSE_ses, 'UTC+0')))
-On_sesSydney = math.sign(nz(time(timeframe.period, sesSydney_ses, 'UTC+0')))
+On_sesasia              = math.sign(nz(time(timeframe.period,   sesasia_ses,        'UTC+0')))
+On_sesEuro              = math.sign(nz(time(timeframe.period,   sesEuro_ses,        'UTC+0')))
+On_sesTokyo             = math.sign(nz(time(timeframe.period,   sesTokyo_ses,       'UTC+0')))
+On_sesShanghai          = math.sign(nz(time(timeframe.period,   sesShanghai_ses,    'UTC+0')))
+On_seslondon            = math.sign(nz(time(timeframe.period,   seslondon_ses,      'UTC+0')))
+On_sesNewyork           = math.sign(nz(time(timeframe.period,   sesNewyork_ses,     'UTC+0')))
+On_sesNYSE              = math.sign(nz(time(timeframe.period,   sesNYSE_ses,        'UTC+0')))
+On_sesSydney            = math.sign(nz(time(timeframe.period,   sesSydney_ses,      'UTC+0')))
 
 //High & Low Session Detector 
 LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
