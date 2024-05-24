@@ -223,6 +223,16 @@ indicator("Session Lite [@Ultr]", "Sess Lite", overlay = true, max_bars_back = 5
     //  color colorTvNitRed40                   = #e91e63           // TradingViewRedLight
     //  color colorTvLightBlueSky50             = #12cef8           // TradingViewBlueSky
 
+//  ═══  TFlab  ═══
+    //  color colorTFlabAsia                    = #8bbcfc           // Lite TFlabAsia                        
+    //  color colorTFlabSydney                  = #F0B884           // Lite TFlabSydney                      
+    //  color colorTFlabTokyo                   = #0CC1C0           // Lite TFlabTokyo                       
+    //  color colorTFlabShanghai                = #ea1616           // Lite TFlabShanghai                    
+    //  color colorTFlabEuro                    = #BBE8B5           // Lite TFlabEuro                        
+    //  color colorTFlabLondon                  = #ACBBE8           // Lite TFlabLondon                      
+    //  color colorTFlabNewyork                 = #C5ACE8           // Lite TFlabNewyork                     
+    //  color colorTFlabNYSE                    = #87c2d4           // Lite TFlabNYSE                        
+
 //  ═══  Ultr  ═══
     //  color colorUltrBlueSky10                = #59F2E9           // UltrBlueSky10
     //  color colorUltrBlueSky20                = #39F0EA           // UltrBlueSky20
@@ -239,6 +249,7 @@ indicator("Session Lite [@Ultr]", "Sess Lite", overlay = true, max_bars_back = 5
 ///////////////////////////////// 
 
 //  ═══  Basic  ═══
+color colorAxi413dab8			            = #00275d           // Axi413dab8
 color colorVisaBrandPrimary			        = #1434CB           // VisaBrandPrimary
 color colorTvBlue50                         = #0034c5           // TradingViewBlue
 color colorArbePrimary			            = #0035FF           // ArbePrimary
@@ -293,20 +304,24 @@ color colorAxiSecondary		                = #282424           // AxiSecondary
 //  ═════════════════
 //  ═══  Session  ═══
 //  ═══  Variables  ═══
-var grpColor		= " ═══ Color ═══ "
-sesasia_color           = input.color(#8bbcfc,          title = 'Color',                        group = 'Asia Session',         inline = 'sessAsia')
-sesSydney_color         = input.color(#F0B884,          title = 'Color',                        group = 'Sydney Session',       inline = 'sessSydney')
-sesTokyo_color          = input.color(#0CC1C0,          title = 'Color',                        group = 'Tokyo Session',        inline = 'sessTokyo')
-sesShanghai_color       = input.color(#ea1616,          title = 'Color',                        group = 'Shanghai Session',     inline = 'sessShanghai')
-sesEuro_color           = input.color(#BBE8B5,          title = 'Color',                        group = 'Europe Session',       inline = 'sessEuro')
-seslondon_color         = input.color(#ACBBE8,          title = 'Color',                        group = 'London Session',       inline = 'sessLondon')
-sesNewyork_color        = input.color(#C5ACE8,          title = 'Color',                        group = 'New Yokr Session',     inline = 'sessNewyork')
-sesNYSE_color           = input.color(#87c2d4,          title = 'Color',                        group = 'NYSE Session',         inline = 'sessNYSE')
+var grpColor		    = " ═══ Color ═══ "
+colorSessAsia           = input.color(colorUltrFucsia30,                    title = "",        group = grpColor,         inline = 'ccolor')
+colorSessSydney         = input.color(colorAmeritradeGrayAluminum,          title = "",        group = grpColor,         inline = 'ccolor')
+colorSessTokyo          = input.color(colorGrayScaleSecondaryLavender,      title = "",        group = grpColor,         inline = 'ccolor')
+colorSessShanghai       = input.color(colorUltrLyla,                        title = "",        group = grpColor,         inline = 'ccolor')
+colorSessEuro           = input.color(colorBrightYellow40,                  title = "",        group = grpColor,         inline = 'ccolor')
+colorSessLondon         = input.color(colorBrightYellow10,                  title = "",        group = grpColor,         inline = 'ccolor')
+colorSessNewyork        = input.color(colorUltrMenta30,                     title = "",        group = grpColor,         inline = 'ccolor')
+colorSessNYSE           = input.color(colorUltrBlueSky20,                   title = "",        group = grpColor,         inline = 'ccolor')
+
+colorTableLong          = input.color(colorTvLightGreen50,                  title = "")
+colorTableShort         = input.color(colorTvNitRed40,                      title = "")
+colorTableBackGround    = input.color(colorAxi413dab8,                      title = "")
 
 var grpSection		    = " ═══ Segmentos ═══ "
 
 //  ═══  Titulo de Area  ═══
-var grpSmc		= " ═══ Día ═══ "
+var grpSmc		        = " ═══ Día ═══ "
 sesasia_text            = 'Asia'
 sesSydney_text          = 'Sydney'
 sesTokyo_text           = 'Tokyo'
@@ -338,9 +353,23 @@ show_sesStartLondon     = input(false,                  title = 'London Start Se
 show_sesStartNewyork    = input(true,                   title = 'Newyork Start Session',        group = 'New York Session') 
 show_sesStartNYSE       = input(false,                  title = 'NYSE Start Session',           group = 'NYSE Session') 
 
-//  ═══  Estructura de Zonas Horarias  ═══
+//  ═══  Zonas Horarias  ═══
 var grpTimeZone	        = " ═══ TimeZone ═══ "
-//  ═══  Session Asia  ═══
+
+string sessionNy        = "America/New_York"					    // Sesion - America/New York
+string sessionCh        = "America/Chicago"					        // Sesion - America/Chicago
+string sessionEu        = "Europe/London"					        // Sesion - Europa/Londres
+string sessionAs        = "Asia/Shanghai"					        // Sesion - Asia/Shanghai
+string sessionAu        = "Australia/Sydney"				        // Sesion - Asia/Shanghai
+
+
+
+
+
+
+
+
+
 sesasia_ses             = input.session('2300-0600',    title = '',                             group = 'Asia Session',         inline = 'sessAsia')
 sesSydney_ses           = input.session('2300-0500',    title = '',                             group = 'Sydney Session',       inline = 'sessSydney')
 sesTokyo_ses            = input.session('0000-0600',    title = '',                             group = 'Tokyo Session',        inline = 'sessTokyo')
@@ -353,6 +382,43 @@ sesNYSE_ses             = input.session('1430-2200',    title = '',             
 //  ═══  Session Sydney  ═══
 
 //  ═══  Session Tokyo  ═══
+
+
+//  ═══════════════
+//  ═══  Cross  ═══
+//  ═══  Options  ═══
+
+optionSession   = input.string  (defval="New York",     title="Sesión",     options = ["New York", "Europe", "Asia", "Sydney"])
+optionKillZ     = input.string  (defval="NYSE",         title="Sesión",     options = ["New York", "NYSE", "Londres", "Shanghai", "Sydney"])
+
+//  ══════════════
+//  ═══  Neon  ═══
+//  ═══  Types  ═══
+type OHL
+    float O = open
+    float H = high
+    float L = low
+    float C = close
+    float V = volume
+
+//  ═══════════════
+//  ═══  Cross  ═══
+//  ═══  Functions  ═══
+
+ma(source, length, type) =>
+    type == "SMA" ? ta.sma(source, length) :    // Media Movil Simple
+     type == "EMA" ? ta.ema(source, length) :   // Media Movil Exponencial
+     type == "RMA" ? ta.rma(source, length) :   // Media Movil
+     type == "WMA" ? ta.wma(source, length) :   // Media Movil Ponderada
+     type == "VWMA" ? ta.vwma(source, length) : // Media Movil Ponderada por volumen
+     na
+
+//  ═══════════════
+//  ═══  Cross  ═══
+//  ═══  Instances  ═══
+ohl = OHL.new()
+
+ma8   = ma(ohl.C, length8,    optionMa)
 
 //  ═══  Session Shanghai  ═══
 
@@ -421,28 +487,28 @@ LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
     [High , Low ]
 
 if sesShowAsia 
-    [HighA, LowA]  = LowHighSessionDetector(On_sesAsia, sesasia_color,sesasia_text)
+    [HighA, LowA]  = LowHighSessionDetector(On_sesAsia, colorSessAsia,sesasia_text)
 
 if sesShowSydney 
-    [HighS, LowS]  = LowHighSessionDetector(On_sesSydney,sesSydney_color,sesSydney_text)
+    [HighS, LowS]  = LowHighSessionDetector(On_sesSydney,colorSessSydney,sesSydney_text)
 
 if sesShowTokyo 
-    [HighT, LowT]  = LowHighSessionDetector(On_sesTokyo,sesTokyo_color,sesTokyo_text)
+    [HighT, LowT]  = LowHighSessionDetector(On_sesTokyo,colorSessTokyo,sesTokyo_text)
 
 if sesShowShanghai 
-    [HighSh, LowSh]  = LowHighSessionDetector(On_sesShanghai,sesShanghai_color,sesShanghai_text)
+    [HighSh, LowSh]  = LowHighSessionDetector(On_sesShanghai,colorSessShanghai,sesShanghai_text)
 
 if sesShowEuro 
-    [HighE, LowE]  = LowHighSessionDetector(On_sesEuro,sesEuro_color,sesEuro_text)
+    [HighE, LowE]  = LowHighSessionDetector(On_sesEuro,colorSessEuro,sesEuro_text)
 
 if sesShowLondon 
-    [HighL, LowL]  = LowHighSessionDetector(On_sesLondon,seslondon_color,seslondon_text)
+    [HighL, LowL]  = LowHighSessionDetector(On_sesLondon,colorSessLondon,seslondon_text)
 
 if sesShowNewyork 
-    [HighN, LowN]  = LowHighSessionDetector(On_sesNewyork,sesNewyork_color,sesNewyork_text)
+    [HighN, LowN]  = LowHighSessionDetector(On_sesNewyork,colorSessNewyork,sesNewyork_text)
 
 if sesShowNYSE
-    [HighNY, LowNY]  = LowHighSessionDetector(On_sesNYSE,sesNYSE_color,sesNYSE_text)
+    [HighNY, LowNY]  = LowHighSessionDetector(On_sesNYSE,colorSessNYSE,sesNYSE_text)
 
 //  ═══  Table Vars  ═══
 var Info_Table = table.new(position.top_right, 4, 10, bgcolor = #283c74, border_color = #53609bcb, border_width = 1, 
@@ -456,44 +522,51 @@ if Show_Info_Table
     table.cell(Info_Table, 2, 1, 'Start(UTC)', text_color = color.white, text_size = size.small)
     table.cell(Info_Table, 3, 1, 'End(UTC)', text_color = color.white, text_size = size.small)
 
-    table.cell(Info_Table, 0, 2, sesasia_text, text_color = sesasia_color, text_size = size.small)
-    table.cell(Info_Table, 0, 3, sesSydney_text, text_color = sesSydney_color, text_size = size.small)
-    table.cell(Info_Table, 0, 4, sesTokyo_text, text_color = sesTokyo_color, text_size = size.small)
-    table.cell(Info_Table, 0, 5, sesShanghai_text, text_color = color.new(sesShanghai_color, 1), text_size = size.small)   
-    table.cell(Info_Table, 0, 6, sesEuro_text, text_color = sesEuro_color, text_size = size.small)
-    table.cell(Info_Table, 0, 7, seslondon_text, text_color = seslondon_color, text_size = size.small)
-    table.cell(Info_Table, 0, 8, sesNewyork_text, text_color = sesNewyork_color, text_size = size.small)
-    table.cell(Info_Table, 0, 9, sesNYSE_text, text_color = sesNYSE_color, text_size = size.small)
+    table.cell(Info_Table, 0, 2, sesasia_text, text_color = colorSessAsia, text_size = size.small)
+    table.cell(Info_Table, 0, 3, sesSydney_text, text_color = colorSessSydney, text_size = size.small)
+    table.cell(Info_Table, 0, 4, sesTokyo_text, text_color = colorSessTokyo, text_size = size.small)
+    table.cell(Info_Table, 0, 5, sesShanghai_text, text_color = color.new(colorSessShanghai, 1), text_size = size.small)   
+    table.cell(Info_Table, 0, 6, sesEuro_text, text_color = colorSessEuro, text_size = size.small)
+    table.cell(Info_Table, 0, 7, seslondon_text, text_color = colorSessLondon, text_size = size.small)
+    table.cell(Info_Table, 0, 8, sesNewyork_text, text_color = colorSessNewyork, text_size = size.small)
+    table.cell(Info_Table, 0, 9, sesNYSE_text, text_color = colorSessNYSE, text_size = size.small)
 
     //  ═══  Table Display  ═══
-    table.cell(Info_Table, 1, 2, (On_sesasia ? 'Open' : 'Closed')
-      , bgcolor = On_sesasia ? #56a3a6 : #db504a
+    table.cell(Info_Table, 1, 2, (On_sesAsia ? 'Open' : 'Closed')
+      , bgcolor = On_sesAsia ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
+
     table.cell(Info_Table, 1, 3, (On_sesSydney ? 'Open' : 'Closed')
       , bgcolor = On_sesSydney ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
+
     table.cell(Info_Table, 1, 4, (On_sesTokyo ? 'Open' : 'Closed')
       , bgcolor = On_sesTokyo ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
+
     table.cell(Info_Table, 1, 5, (On_sesShanghai ? 'Open' : 'Closed')
       , bgcolor = On_sesShanghai ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
+
     table.cell(Info_Table, 1, 6, (On_sesEuro ? 'Open' : 'Closed')
       , bgcolor = On_sesEuro ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
-    table.cell(Info_Table, 1, 7, (On_seslondon ? 'Open' : 'Closed')
-      , bgcolor = On_seslondon ? #56a3a6 : #db504a
+
+    table.cell(Info_Table, 1, 7, (On_sesLondon ? 'Open' : 'Closed')
+      , bgcolor = On_sesLondon ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
+
     table.cell(Info_Table, 1, 8, (On_sesNewyork ? 'Open' : 'Closed')
       , bgcolor = On_sesNewyork ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
       , text_size = size.small)
+
     table.cell(Info_Table, 1, 9, (On_sesNYSE ? 'Open' : 'Closed')
       , bgcolor = On_sesNYSE ? #56a3a6 : #db504a
       , text_color = color.rgb(0, 0, 0)
@@ -519,14 +592,14 @@ if Show_Info_Table
 
 //show open time 
 
-on_StartsesAsia     = math.sign(nz(time(timeframe.period, '2300-2301' , 'UTC+0')))
-on_StartsesSydney   = math.sign(nz(time(timeframe.period, '2300-2301' , 'UTC+0')))
-on_StartsesTokyo    = math.sign(nz(time(timeframe.period, '0000-0001' , 'UTC+0')))
-on_StartsesShanghai = math.sign(nz(time(timeframe.period, '0130-0131' , 'UTC+0')))
-on_StartsesEuro     = math.sign(nz(time(timeframe.period, '0700-0701' , 'UTC+0')))
-on_StartsesLondon   = math.sign(nz(time(timeframe.period, '0800-0801' , 'UTC+0')))
-on_StartsesNewyork  = math.sign(nz(time(timeframe.period, '1300-1301' , 'UTC+0')))
-on_StartsesNYSE     = math.sign(nz(time(timeframe.period, '1430-1431' , 'UTC+0')))
+on_StartsesAsia     = math.sign(nz(time(timeframe.period, '1800-1801' , 'UTC-5')))
+on_StartsesSydney   = math.sign(nz(time(timeframe.period, '1900-1901' , 'UTC-5')))
+on_StartsesTokyo    = math.sign(nz(time(timeframe.period, '1800-1801' , 'UTC-5')))
+on_StartsesShanghai = math.sign(nz(time(timeframe.period, '1930-1931' , 'UTC-5')))
+on_StartsesEuro     = math.sign(nz(time(timeframe.period, '0200-0201' , 'UTC-5')))
+on_StartsesLondon   = math.sign(nz(time(timeframe.period, '0300-0301' , 'UTC-5')))
+on_StartsesNewyork  = math.sign(nz(time(timeframe.period, '0700-0701' , 'UTC-5')))
+on_StartsesNYSE     = math.sign(nz(time(timeframe.period, '0830-0831' , 'UTC-5')))
 
 StartLine(Width) =>
     StartLine = line.new(bar_index, open - 1 , bar_index, open + 1 , xloc.bar_index, extend.both, #aeafb196 , line.style_dashed, Width)
