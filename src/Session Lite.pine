@@ -312,6 +312,9 @@ var grpSessLondon		= " London"
 var grpSessNewYork		= " New York"
 var grpSessNYSE			= " NYSE"
 
+//  ═══  Información  ═══
+ShowTableInform         = input(defval = false,							title = "Visualizar Información")
+
 sesShowSydney           = input(defval = false,         				title = "",    			inline = "sessSyd",     		group = grpSessSydney) 
 sesShowTokyo            = input(defval = true,          				title = "",	    		inline = "sessTko",     		group = grpSessTokyo) 
 sesShowLondon           = input(defval = true,          				title = "",    			inline = "sessLdn",     		group = grpSessLondon) 
@@ -319,11 +322,11 @@ sesShowNewyork          = input(defval = true,          				title = "",    			in
 sesShowNYSE             = input(defval = false,         				title = "",    			inline = "sessNYS",      		group = grpSessNYSE) 
 
 //  ═══  Time Sesión  ═══
-sesTimeSydney           = input.session("1700-0200",    				title = "",     		inline = "sessSyd",				group = grpSessSydney)
-sesTimeTokyo            = input.session("1800-0300",    				title = "",     		inline = "sessTko",				group = grpSessTokyo)
-sesTimeLondon           = input.session("0200-1100",    				title = "",     		inline = "sessLdn",				group = grpSessLondon)
-sesTimeNewyork          = input.session("0700-1600",    				title = "",     		inline = "sessNy",				group = grpSessNewYork)
-sesTimeNYSE             = input.session("0830-1500",    				title = "",     		inline = "sessNYS",				group = grpSessNYSE)
+sesTimeSydney           = input.session("1700-0200:12345",    				title = "",     		inline = "sessSyd",				group = grpSessSydney)
+sesTimeTokyo            = input.session("1800-0300:12345",    				title = "",     		inline = "sessTko",				group = grpSessTokyo)
+sesTimeLondon           = input.session("0200-1100:23456",    				title = "",     		inline = "sessLdn",				group = grpSessLondon)
+sesTimeNewyork          = input.session("0700-1600:23456",    				title = "",     		inline = "sessNy",				group = grpSessNewYork)
+sesTimeNYSE             = input.session("0830-1500:23456",    				title = "",     		inline = "sessNYS",				group = grpSessNYSE)
 
 //  ═══  KillZones segun Sesion  ═══
 var grpKillZ			= " ═══ KillZones ═══ "
@@ -414,27 +417,6 @@ labelStyle(sizeZ) =>
         'Small'  => size.small
         'Normal' => size.normal
 
-// MOPLSS	=
-// 	MOPLS == "Solid" ? line.style_solid :
-// 	MOPLS == "Dotted" ? line.style_dotted :
-// 	line.style_dashed
-
-
-// typeSess(type) =>
-//     type == "New York"		? timeNewY	:			// Sesión New York
-//      type == "NYSE"			? timeNYSE	:			// Sesión Nyse
-//      type == "Chicago"		? timeChig	:			// Sesión Chicago
-//      type == "Londres"		? timeLond	:			// Sesión Londres
-//      type == "Tokyo"			? timeToky	:			// Sesión Shanghai
-//      type == "Sydney"		? timeSydn	:			// Sesión Sydney
-//      type == "US"			? timeUs	:			// Sesión Stock US
-//      type == "Asia"			? timeAsia	:			// Sesión Asia
-//      type == "Europe"		? timeEuro	:			// Sesión Europa
-//      type == "América"		? timeAme	:			// Sesión América
-//      type == "Australia"		? timeAus	:			// Sesión Australia
-//      type == "Argentina"		? timeArge	:			// Sesión Argentina
-//      na
-
 //  ══════════════
 //  ═══  Lite  ═══
 //  ═══  Switch  ═══
@@ -470,11 +452,9 @@ string switchKillZone = switch optionKillZ
 
 ohl = OHL.new()
 
-// ma8   = ma(ohl.C, length8,    optionMa)
-
-//  ═══  Session Shanghai  ═══
-
-ShowTableInform         = input(defval = false,		title = "Info",			group = 'Table')
+//  ══════════════
+//  ═══  Lite  ═══
+//  ═══  Maths  ═══
 
 //zones
 
@@ -508,7 +488,7 @@ LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
         Bar         := 0
 
     if On_Session > On_Session[1]
-        BoX				:= box.new(bar_index, High, bar_index, Low,bgcolor = color.new(Color_Session, 95),
+        BoX				:= box.new(bar_index, High, bar_index, Low, bgcolor = color.new(Color_Session, 95),
          border_color	= color.new(Color_Session, 30),
 		 border_width	= 2 , 
          border_style	= switchLines)
