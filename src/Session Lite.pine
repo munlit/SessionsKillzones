@@ -305,62 +305,60 @@ color colorAxiSecondary		                = #282424           // AxiSecondary
 //  ═══  Session  ═══
 //  ═══  Variables  ═══
 var grpColor		    = " ═══ Color ═══ "
-colorSessAsia           = input.color(colorUltrFucsia30,                    title = "",        group = grpColor,         inline = 'ccolor')
-colorSessSydney         = input.color(colorAmeritradeGrayAluminum,          title = "",        group = grpColor,         inline = 'ccolor')
-colorSessTokyo          = input.color(colorGrayScaleSecondaryLavender,      title = "",        group = grpColor,         inline = 'ccolor')
-colorSessShanghai       = input.color(colorUltrLyla,                        title = "",        group = grpColor,         inline = 'ccolor')
-colorSessEuro           = input.color(colorBrightYellow40,                  title = "",        group = grpColor,         inline = 'ccolor')
-colorSessLondon         = input.color(colorBrightYellow10,                  title = "",        group = grpColor,         inline = 'ccolor')
-colorSessNewyork        = input.color(colorUltrMenta30,                     title = "",        group = grpColor,         inline = 'ccolor')
-colorSessNYSE           = input.color(colorUltrBlueSky20,                   title = "",        group = grpColor,         inline = 'ccolor')
+colorSessAsia           = input.color(colorUltrFucsia30,                    title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessSydney         = input.color(colorAmeritradeGrayAluminum,          title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessTokyo          = input.color(colorGrayScaleSecondaryLavender,      title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessShanghai       = input.color(colorUltrLyla,                        title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessEuro           = input.color(colorBrightYellow40,                  title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessLondon         = input.color(colorBrightYellow10,                  title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessNewyork        = input.color(colorUltrMenta30,                     title = "",        			inline = 'ccolor',		group = grpColor)
+colorSessNYSE           = input.color(colorUltrBlueSky20,                   title = "",        			inline = 'ccolor',		group = grpColor)
 
-color colorTableLong          = input.color(colorTvLightGreen50,                  title = "",			display = display.none)
-color colorTableShort         = input.color(colorTvNitRed40,                      title = "",			display = display.none)
-color colorTableBackGround    = input.color(colorAxi413dab8,                      title = "",			display = display.none)
-
+color colorTableLong    = input.color(colorTvLightGreen50,            		title = "",					display = display.none)
+color colorTableShort   = input.color(colorTvNitRed40,                		title = "",					display = display.none)
+color colorTableBackG	= input.color(colorAxi413dab8,                		title = "",					display = display.none)
 
 //  ═══  Checklist de Sesiones  ═══
-var grpTimeSession		= " ═══ Sesiones ═══ "
-sesShowAsia            = input(defval = false,          title = '__Asia__',	    	inline = "sessAs",      group = grpTimeSession)
-sesShowShanghai        = input(defval = false,          title = 'Shanghai',	       	inline = "sessSg",      group = grpTimeSession) 
-sesShowAustralia       = input(defval = false,          title = 'Australia',       	inline = "sessAu",      group = grpTimeSession) 
-sesShowEuropa          = input(defval = false,          title = '_Europa_',    		inline = "sessEu",      group = grpTimeSession) 
-sesShowAmerica         = input(defval = false,          title = 'America_',	  	   	inline = "sessAm",      group = grpTimeSession)
+var grpTimeS			= " ═══ Sesiones ═══ "
+sesShowAsia             = input(defval = false,         					title = '__Asia__',	    	inline = "sessAs",      group = grpTimeS)
+sesShowShanghai         = input(defval = false,         					title = 'Shanghai',	       	inline = "sessSg",      group = grpTimeS) 
+sesShowAustralia        = input(defval = false,         					title = 'Australia',       	inline = "sessAu",      group = grpTimeS) 
+sesShowEuropa           = input(defval = false,         					title = '_Europa_',    		inline = "sessEu",      group = grpTimeS) 
+sesShowAmerica          = input(defval = false,         					title = 'America_',	  	   	inline = "sessAm",      group = grpTimeS) 
 
-sesShowSydney          = input(defval = false,          title = '_Sydney_',    		inline = "sessSy",      group = grpTimeSession) 
-sesShowTokyo           = input(defval = true,           title = '_Tokyo__',	    	inline = "sessTk",      group = grpTimeSession) 
-sesShowLondon          = input(defval = true,           title = '_London_',    		inline = "sessLd",      group = grpTimeSession) 
-sesShowNewyork         = input(defval = true,           title = 'Newyork_',    		inline = "sessNy",      group = grpTimeSession) 
-sesShowNYSE            = input(defval = false,          title = '__NYSE__',    		inline = "sessNS",      group = grpTimeSession) 
+sesShowSydney           = input(defval = false,         					title = '_Sydney_',    		inline = "sessSy",      group = grpTimeS) 
+sesShowTokyo            = input(defval = true,          					title = '_Tokyo__',	    	inline = "sessTk",      group = grpTimeS) 
+sesShowLondon           = input(defval = true,          					title = '_London_',    		inline = "sessLd",      group = grpTimeS) 
+sesShowNewyork          = input(defval = true,          					title = 'Newyork_',    		inline = "sessNy",      group = grpTimeS) 
+sesShowNYSE             = input(defval = false,         					title = '__NYSE__',    		inline = "sessNS",      group = grpTimeS) 
 
 //  ═══  Time Sesión  ═══
-sesTimeAsia             = input.session("1800-0300",    title = "",     				inline = "sessAs",		group = grpTimeSession)
-sesTimeShanghai         = input.session("1800-0300",    title = "",     				inline = "sessSg",		group = grpTimeSession)
-sesTimeAustralia        = input.session("1700-0200",    title = "",     				inline = "sessAu",		group = grpTimeSession)
-sesTimeEuropa           = input.session("0200-1100",    title = "",     				inline = "sessEu",		group = grpTimeSession)
-sesTimeAmerica          = input.session("0700-1600",    title = "",     				inline = "sessAm",		group = grpTimeSession)
+sesTimeAsia             = input.session("1800-0300",    					title = "",     			inline = "sessAs",		group = grpTimeS)
+sesTimeShanghai         = input.session("1800-0300",    					title = "",     			inline = "sessSg",		group = grpTimeS)
+sesTimeAustralia        = input.session("1700-0200",    					title = "",     			inline = "sessAu",		group = grpTimeS)
+sesTimeEuropa           = input.session("0200-1100",    					title = "",     			inline = "sessEu",		group = grpTimeS)
+sesTimeAmerica          = input.session("0700-1600",    					title = "",     			inline = "sessAm",		group = grpTimeS)
 
-sesTimeTokyo            = input.session("1800-0300",    title = "",     				inline = "sessTk",		group = grpTimeSession)
-sesTimeSydney           = input.session("1700-0200",    title = "",     				inline = "sessSy",		group = grpTimeSession)
-sesTimeLondon           = input.session("0200-1100",    title = "",     				inline = "sessLd",		group = grpTimeSession)
-sesTimeNewyork          = input.session("0700-1600",    title = "",     				inline = "sessNy",		group = grpTimeSession)
-sesTimeNYSE             = input.session("0830-1500",    title = "",     				inline = "sessNS",		group = grpTimeSession)
-
+sesTimeTokyo            = input.session("1800-0300",    					title = "",     			inline = "sessTk",		group = grpTimeS)
+sesTimeSydney           = input.session("1700-0200",    					title = "",     			inline = "sessSy",		group = grpTimeS)
+sesTimeLondon           = input.session("0200-1100",    					title = "",     			inline = "sessLd",		group = grpTimeS)
+sesTimeNewyork          = input.session("0700-1600",    					title = "",     			inline = "sessNy",		group = grpTimeS)
+sesTimeNYSE             = input.session("0830-1500",    					title = "",     			inline = "sessNS",		group = grpTimeS)
 
 //  ═══  KillZones segun Sesion  ═══
 var grpKillZ			= " ═══ KillZones ═══ "
-sesShowAlva       		= input(defval = false,         title = "___Alva___",   inline = "seA",    				group = grpKillZ)
-sesShowPre     			= input(defval = false,         title = "Pre Mercado",	inline = "seP",    				group = grpKillZ)
-sesShowOpen      		= input(defval = true,          title = "_Apertura_",	inline = "seO",    				group = grpKillZ)
-sesShowRally   			= input(defval = true,          title = "Corrección_",	inline = "seR",    				group = grpKillZ) 
-sesShowEnd       		= input(defval = true,          title = "__Cierre__",	inline = "seE",    				group = grpKillZ) 
+sesShowAlva       		= input(defval = false,         					title = "___Alva___",   	inline = "seA",   		group = grpKillZ)
+sesShowPre     			= input(defval = false,         					title = "Pre Mercado",		inline = "seP",   		group = grpKillZ)
+sesShowOpen      		= input(defval = true,          					title = "_Apertura_",		inline = "seO",   		group = grpKillZ)
+sesShowRally   			= input(defval = true,          					title = "Corrección_",		inline = "seR",   		group = grpKillZ) 
+sesShowEnd       		= input(defval = true,          					title = "__Cierre__",		inline = "seE",   		group = grpKillZ) 
 
 //  ═══  KillZone  ═══
-killTimeAlva			= input.session("0400-0530",    title = "",				inline = "seA",					group = grpKillZ)
-killTimePre				= input.session("0700-0745",    title = "",				inline = "seP",					group = grpKillZ)
-killTimeOpen			= input.session("0900-1030",    title = "",				inline = "seO",					group = grpKillZ)
-killTimeRally			= input.session("1130-1145",    title = "",				inline = "seR",					group = grpKillZ)
-killTimeEnd				= input.session("1230-1430",    title = "",				inline = "seE",					group = grpKillZ)
+killTimeAlva			= input.session("0400-0530",    					title = "",					inline = "seA",			group = grpKillZ)
+killTimePre				= input.session("0700-0745",    					title = "",					inline = "seP",			group = grpKillZ)
+killTimeOpen			= input.session("0900-1030",    					title = "",					inline = "seO",			group = grpKillZ)
+killTimeRally			= input.session("1130-1145",    					title = "",					inline = "seR",			group = grpKillZ)
+killTimeEnd				= input.session("1230-1430",    					title = "",					inline = "seE",			group = grpKillZ)
 
 //  ═══  Titulo de Area  ═══
 var grpSmc		       = " ═══ Día ═══ "
