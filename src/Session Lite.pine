@@ -366,27 +366,27 @@ string textAme	          	= "América"
 string textEuro          	= "Europe"
 string textUs	          	= "Us"
 
-string timeAme				= "America/New_York"					// Sesion - America
-string timeAsia				= "Asia/Tokyo"							// Sesion - Asia
-string timeEuro				= "Europe/London"						// Sesion - Europa
-string timeAus				= "Australia/Sydney"					// Sesion - Australia
-string timeUs				= "America/New_York"					// Sesion - Australia
+string timeAme				= "UTC-5"								//	"America/New_York"
+string timeAsia				= "UTC+9"								//	"Asia/Tokyo"
+string timeEuro				= "UTC+1"								//	"Europe/London"
+string timeAus				= "UTC+10"								//	"Australia/Sydney"
+string timeUs				= "UTC-4"								//	"America/New_York"
 
-string timeNYSE				= "America/Chicago"						// Sesion - America/New York
-string timeNewY				= "America/New_York"					// Sesion - America/New York
-string timeChig				= "America/Chicago"						// Sesion - America/Chicago
-string timeArge				= "America/Argentina/Buenos_Aires"		// Sesion - America/Buenos Aires
-string timeLond				= "Europe/London"						// Sesion - Europa/Londres
-string timeShan				= "Asia/Shanghai"						// Sesion - Asia/Shanghai
-string timeToky				= "Asia/Tokyo"							// Sesion - Asia/Tokyo
-string timeSydn				= "Australia/Sydney"					// Sesion - Australia/Sydney
+string timeNYSE				= "UTC-5"								//	"America/Chicago"
+string timeNewY				= "UTC-4"								//	"America/New_York"
+string timeChig				= "UTC-5"								//	"America/Chicago"
+string timeArge				= "UTC-3"								//	"America/Argentina/Buenos_Aires"
+string timeLond				= "UTC+1"								//	"Europe/London"
+string timeShan				= "UTC+8"								//	"Asia/Shanghai"
+string timeToky				= "UTC+9"								//	"Asia/Tokyo"
+string timeSydn				= "UTC+10"								//	"Australia/Sydney"
 
 //  ══════════════
 //  ═══  Lite  ═══
 //  ═══  Options  ═══
 
 optionSession   = input.string  (defval="Chicago",		title="Sesiones ",    	options = ["New York", "Chicago", "NYSE", "Londres", "Tokyo", "Sydney, Argentina"])
-optionKillZ     = input.string  (defval=na,				title="KillZones",    	options = ["New York", "Chicago", "NYSE", "Londres", "Tokyo", "Sydney, Argentina"])
+// optionKillZ     = input.string  (defval=na,				title="KillZones",    	options = ["New York", "Chicago", "NYSE", "Londres", "Tokyo", "Sydney, Argentina"])
 
 //  ══════════════
 //  ═══  Lite  ═══
@@ -440,29 +440,24 @@ labelStyle(sizeZ) =>
 // 	"Australia"	 => timeAus
 // 	=> timeUs
 
-string switchSession = switch optionSession
-	"New York"	 => timeNewY				
-	"Chicago"	 => timeChig	
-	"Londres"	 => timeLond	
-	"Tokyo"		 => timeToky
-	"Sydney"	 => timeSydn
-	"Argentina"	 => timeArge
-	=> timeChig	
+// string switchSession = switch optionSession
+// 	"New York"	 => timeNewY				
+// 	"Chicago"	 => timeChig	
+// 	"Londres"	 => timeLond	
+// 	"Tokyo"		 => timeToky
+// 	"Sydney"	 => timeSydn
+// 	"Argentina"	 => timeArge
+// 	=> timeChig	
 
-string switchKillZone = switch optionKillZ
-	"New York"	 => timeNewY				
-	"Chicago"	 => timeChig	
-	"Londres"	 => timeLond	
-	"Shanghai"	 => timeShan	
-	"Tokyo"		 => timeToky
-	"Sydney"	 => timeSydn
-	"Argentina"	 => timeArge
-	=> na
-
-//  ══════════════
-//  ═══  Lite  ═══
-//  ═══  Functions  ═══
-
+// string switchKillZone = switch optionKillZ
+// 	"New York"	 => timeNewY				
+// 	"Chicago"	 => timeChig	
+// 	"Londres"	 => timeLond	
+// 	"Shanghai"	 => timeShan	
+// 	"Tokyo"		 => timeToky
+// 	"Sydney"	 => timeSydn
+// 	"Argentina"	 => timeArge
+// 	=> na
 
 //  ══════════════
 //  ═══  Lite  ═══
@@ -477,14 +472,14 @@ ohl = OHL.new()
 ShowTableInform         = input(defval = false,		title = "Info",			group = 'Table')
 
 //zones
-On_sesAsia              = math.sign(nz(time(timeframe.period,   session = timeAsia,	timezone = "UTC-5")))
-On_sesEuro              = math.sign(nz(time(timeframe.period,   session = timeEuro,	timezone = "UTC-5")))
-On_sesTokyo             = math.sign(nz(time(timeframe.period,   session = timeToky,	timezone = "UTC-5")))
-On_sesShanghai          = math.sign(nz(time(timeframe.period,   session = timeShan,	timezone = "UTC-5")))
-On_sesLondon            = math.sign(nz(time(timeframe.period,   session = timeLond,	timezone = "UTC-5")))
-On_sesNewyork           = math.sign(nz(time(timeframe.period,   session = timeNewY,	timezone = "UTC-5")))
-On_sesNYSE              = math.sign(nz(time(timeframe.period,   session = timeNYSE,	timezone = "UTC-5")))
-On_sesSydney            = math.sign(nz(time(timeframe.period,   session = timeSydn,	timezone = "UTC-5")))
+// On_sesAsia              = math.sign(nz(time(timeframe.period,   sesTimeAsia,		"UTC-5")))
+// On_sesEuro              = math.sign(nz(time(timeframe.period,   sesTimeEuro,		"UTC-5")))
+On_sesTokyo             = math.sign(nz(time(timeframe.period,   sesTimeTokyo,		"UTC-5")))
+// On_sesShanghai          = math.sign(nz(time(timeframe.period,   sesTimeShan,		"UTC-5")))
+On_sesLondon            = math.sign(nz(time(timeframe.period,   sesTimeLondon,		"UTC-5")))
+On_sesNewyork           = math.sign(nz(time(timeframe.period,   sesTimeNewyork,		"UTC-5")))
+On_sesNYSE              = math.sign(nz(time(timeframe.period,   sesTimeNYSE,		"UTC-5")))
+On_sesSydney            = math.sign(nz(time(timeframe.period,   sesTimeSydney,		"UTC-5")))
 
 //High & Low Session Detector 
 LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
