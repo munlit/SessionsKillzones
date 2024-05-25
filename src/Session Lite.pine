@@ -320,66 +320,77 @@ color colorTableBackGround    = input.color(colorAxi413dab8,                    
 
 
 //  ═══  Checklist de Sesiones  ═══
-var grpSession		   = " ═══ Sesiones ═══ "
-sesShowAsia            = input(defval = true,                   title = 'Asia Session',                 group = 'Asia Session')
-sesShowSydney          = input(defval = true,                   title = 'Sydney Session',               group = 'Sydney Session') 
-sesShowTokyo           = input(defval = true,                   title = 'Tokyo Session',                group = 'Tokyo Session') 
-sesShowShanghai        = input(defval = true,                   title = 'Shanghai Session',             group = 'Shanghai Session') 
-sesShowEuro            = input(defval = true,                   title = 'Europe Session',               group = 'Europe Session') 
-sesShowLondon          = input(defval = true,                   title = 'London Session',               group = 'London Session') 
-sesShowNewyork         = input(defval = true,                   title = 'Newyork Session',              group = 'New York Session') 
-sesShowNYSE            = input(defval = true,                   title = 'NYSE Session',                 group = 'NYSE Session') 
+var grpTimeSession		= " ═══ Sesiones ═══ "
+sesShowAsia            = input(defval = false,          title = '__Asia__',	    	inline = "sessAs",      group = grpTimeSession)
+sesShowShanghai        = input(defval = false,          title = 'Shanghai',	       	inline = "sessSg",      group = grpTimeSession) 
+sesShowAustralia       = input(defval = false,          title = 'Australia',       	inline = "sessAu",      group = grpTimeSession) 
+sesShowEuropa          = input(defval = false,          title = '_Europa_',    		inline = "sessEu",      group = grpTimeSession) 
+sesShowAmerica         = input(defval = false,          title = 'America_',	  	   	inline = "sessAm",      group = grpTimeSession)
 
-//  ═══  KillZones segun Sesion  ═══
-var grpKillZones	   = " ═══ Kill Zones ═══ "
-sesShowStartAsia       = input(defval = false,                  title = 'Asia Start Session',           group = 'Asia Session')
-sesShowStartSydney     = input(defval = false,                  title = 'Sydney Start Session',         group = 'Sydney Session')
-sesShowStartTokyo      = input(defval = false,                  title = 'Tokyo Start Session',          group = 'Tokyo Session')
-sesShowStartShanghai   = input(defval = false,                  title = 'Shanghai Start Sess',          group = 'Shanghai Session') 
-sesShowStartEuro       = input(defval = true,                   title = 'Europe Start Session',         group = 'Europe Session') 
-sesShowStartLondon     = input(defval = false,                  title = 'London Start Session',         group = 'London Session')
-sesShowStartNewyork    = input(defval = true,                   title = 'Newyork Start Session',        group = 'New York Session') 
-sesShowStartNYSE       = input(defval = false,                  title = 'NYSE Start Session',           group = 'NYSE Session') 
+sesShowSydney          = input(defval = false,          title = '_Sydney_',    		inline = "sessSy",      group = grpTimeSession) 
+sesShowTokyo           = input(defval = true,           title = '_Tokyo__',	    	inline = "sessTk",      group = grpTimeSession) 
+sesShowLondon          = input(defval = true,           title = '_London_',    		inline = "sessLd",      group = grpTimeSession) 
+sesShowNewyork         = input(defval = true,           title = 'Newyork_',    		inline = "sessNy",      group = grpTimeSession) 
+sesShowNYSE            = input(defval = false,          title = '__NYSE__',    		inline = "sessNS",      group = grpTimeSession) 
 
 //  ═══  Time Sesión  ═══
-var grpTimeSession      = " ═══ Time Sesión ═══ "
-sesTimeAsia             = input.session("2300-0600",    title = "",     inline = "sessAsia",			group = grpTimeSession)
-sesTimeTokyo            = input.session("0000-0600",    title = "",     inline = "sessTokyo",			group = grpTimeSession)
-sesTimeShanghai         = input.session("0130-0657",    title = "",     inline = "sessShanghai",		group = grpTimeSession)
-sesTimeAustralia        = input.session("2300-0500",    title = "",     inline = "sessSydney",			group = grpTimeSession)
-sesTimeSydney           = input.session("2300-0500",    title = "",     inline = "sessSydney",			group = grpTimeSession)
-sesTimeEurope           = input.session("0700-1630",    title = "",     inline = "sessEuro",			group = grpTimeSession)
-sesTimeLondon           = input.session("0800-1630",    title = "",     inline = "sessLondon",			group = grpTimeSession)
-sesTimeNewyork          = input.session("1300-2200",    title = "",     inline = "sessNewyork",			group = grpTimeSession)
-sesTimeNYSE             = input.session("0830-1500",    title = "",     inline = "sessNYSE",			group = grpTimeSession)
+sesTimeAsia             = input.session("1800-0300",    title = "",     				inline = "sessAs",		group = grpTimeSession)
+sesTimeShanghai         = input.session("1800-0300",    title = "",     				inline = "sessSg",		group = grpTimeSession)
+sesTimeAustralia        = input.session("1700-0200",    title = "",     				inline = "sessAu",		group = grpTimeSession)
+sesTimeEuropa           = input.session("0200-1100",    title = "",     				inline = "sessEu",		group = grpTimeSession)
+sesTimeAmerica          = input.session("0700-1600",    title = "",     				inline = "sessAm",		group = grpTimeSession)
+
+sesTimeTokyo            = input.session("1800-0300",    title = "",     				inline = "sessTk",		group = grpTimeSession)
+sesTimeSydney           = input.session("1700-0200",    title = "",     				inline = "sessSy",		group = grpTimeSession)
+sesTimeLondon           = input.session("0200-1100",    title = "",     				inline = "sessLd",		group = grpTimeSession)
+sesTimeNewyork          = input.session("0700-1600",    title = "",     				inline = "sessNy",		group = grpTimeSession)
+sesTimeNYSE             = input.session("0830-1500",    title = "",     				inline = "sessNS",		group = grpTimeSession)
 
 
 //  ═══  KillZones segun Sesion  ═══
 var grpKillZ			= " ═══ KillZones ═══ "
-sesShowAlva       		= input(defval = false,         title = '',       		inline = "seA",    		group = grpKillZ)
-sesShowPre     			= input(defval = false,         title = '',       		inline = "seP",    		group = grpKillZ)
-sesShowOpen      		= input(defval = true,          title = '',       		inline = "seO",    		group = grpKillZ)
-sesShowRally   			= input(defval = true,          title = '',       		inline = "seR",    		group = grpKillZ) 
-sesShowEnd       		= input(defval = true,          title = '',       		inline = "seE",    		group = grpKillZ) 
+sesShowAlva       		= input(defval = false,         title = "___Alva___",   inline = "seA",    				group = grpKillZ)
+sesShowPre     			= input(defval = false,         title = "Pre Mercado",	inline = "seP",    				group = grpKillZ)
+sesShowOpen      		= input(defval = true,          title = "_Apertura_",	inline = "seO",    				group = grpKillZ)
+sesShowRally   			= input(defval = true,          title = "Corrección_",	inline = "seR",    				group = grpKillZ) 
+sesShowEnd       		= input(defval = true,          title = "__Cierre__",	inline = "seE",    				group = grpKillZ) 
 
 //  ═══  KillZone  ═══
-killTimeAlva			= input.session("0400-0530",    title = "Alva",			inline = "seA",			group = grpKillZ)
-killTimePre				= input.session("0700-0745",    title = "Pre Mercado",	inline = "seP",			group = grpKillZ)
-killTimeOpen			= input.session("0900-1030",    title = "Apertura",		inline = "seO",			group = grpKillZ)
-killTimeRally			= input.session("1130-1145",    title = "Corrección",	inline = "seR",			group = grpKillZ)
-killTimeEnd				= input.session("1230-1430",    title = "Cierre",		inline = "seE",			group = grpKillZ)
+killTimeAlva			= input.session("0400-0530",    title = "",				inline = "seA",					group = grpKillZ)
+killTimePre				= input.session("0700-0745",    title = "",				inline = "seP",					group = grpKillZ)
+killTimeOpen			= input.session("0900-1030",    title = "",				inline = "seO",					group = grpKillZ)
+killTimeRally			= input.session("1130-1145",    title = "",				inline = "seR",					group = grpKillZ)
+killTimeEnd				= input.session("1230-1430",    title = "",				inline = "seE",					group = grpKillZ)
 
 //  ═══  Titulo de Area  ═══
 var grpSmc		       = " ═══ Día ═══ "
-sesTextAsia            = "Asia"
-sesTextSydney          = "Sydney"
-sesTextTokyo           = "Tokyo"
-sesTextShanghai        = "Shanghai"
-sesTextAustralia       = "Australia"
-sesTextEuropa          = "Europe"
-sesTextLondon          = "London"
-sesTextNewyork         = "New York"
-sesTextNYSE            = "NYSE"
+string textSydney          	= "Sydney"
+string textTokyo           	= "Tokyo"
+string textShanghai        	= "Shanghai"
+string textLondon          	= "London"
+string textNewyork         	= "New York"
+string textNYSE            	= "NYSE"
+
+string textAsia            	= "Asia"
+string textAus		       	= "Australia"
+string textAme	          	= "América"
+string textEuro          	= "Europe"
+string textUs	          	= "Us"
+
+string timeAme				= "America/New_York"					// Sesion - America
+string timeAsia				= "Asia/Tokyo"							// Sesion - Asia
+string timeEuro				= "Europe/London"						// Sesion - Europa
+string timeAus				= "Australia/Sydney"					// Sesion - Australia
+string timeUs				= "America/New_York"					// Sesion - Australia
+
+string timeNYSE				= "America/Chicago"						// Sesion - America/New York
+string timeNewY				= "America/New_York"					// Sesion - America/New York
+string timeChig				= "America/Chicago"						// Sesion - America/Chicago
+string timeArge				= "America/Argentina/Buenos_Aires"		// Sesion - America/Buenos Aires
+string timeLond				= "Europe/London"						// Sesion - Europa/Londres
+string timeShan				= "Asia/Shanghai"						// Sesion - Asia/Shanghai
+string timeToky				= "Asia/Tokyo"							// Sesion - Asia/Tokyo
+string timeSydn				= "Australia/Sydney"					// Sesion - Australia/Sydney
 
 //  ═══════════════
 //  ═══  Lite  ═══
@@ -417,24 +428,23 @@ labelStyle(sizeZ) =>
 //  ═══  Lite  ═══
 //  ═══  Switch  ═══
 
-sessionSwitch = switch optionSession
-    "Us"		=> America/Chicago		//	Sesión Us			America/Chicago
-    "America"	=> America/New_York		//	Sesión New York		America/New_York
-    "Europa"	=> Europe/London		//	Sesión Londres		Europe/London
-    "Australia"	=> Australia/Sydney		//	Sesión Sydney		Australia/Sydney
-    "Asia"		=> Asia/Tokyo			//	Sesión Tokyo		Asia/Tokyo
-    			=> America/New_York
+// switchSession = switch optionSession
+//     "Us"		=> America/Chicago		//	Sesión Us
+//     "America"	=> America/New_York		//	Sesión New York
+//     "Europa"	=> Europe/London		//	Sesión Londres
+//     "Australia"	=> Australia/Sydney		//	Sesión Sydney
+//     "Asia"		=> Asia/Tokyo			//	Sesión Tokyo
+//     			=> America/New_York
 
-sessionKillZone = switch optionKillZ
-    "New York"	=> America/New_York		//	Sesión New York		America/New_York
-    "Chicago"	=> America/Chicago		//	Sesión Chicago		America/Chicago
-    "London"	=> Europe/London		//	Sesión Londres		Europe/London
-    "Sydney"	=> Australia/Sydney		//	Sesión Sydney		Australia/Sydney
-    "Tokyo"		=> Asia/Tokyo			//	Sesión Tokyo		Asia/Tokyo
-    "Shanghai"	=> Asia/Shanghai		//	Sesión Shanghai		Asia/Shanghai
-    			=> America/Chicago
-
-
+string switchKillZone = switch optionKillZ
+	"New York"	 => timeNewY				
+	"Chicago"	 => timeChig	
+	"Argentina"	 => timeArge	
+	"Londres"	 => timeLond	
+	"Shanghai"	 => timeShan	
+	"Tokyo"		 => timeToky
+	"Sydney"	 => timeSydn
+	=> timeChig	
 
 //  ═══════════════
 //  ═══  Lite  ═══
@@ -442,17 +452,18 @@ sessionKillZone = switch optionKillZ
 
 
 sessionS(type) =>
-    type == "América"		? sessionNy :			// Sesión en New  York
-     type == "US"			? sessionNy :			// Sesión de Stock US
-     type == "New York"		? sessionNy :			// Sesión de Stock US
-     type == "NYSE"			? sessionCh :			// Sesión de Stock US
-     type == "Chicago"		? sessionCh :			// Sesión en Chicago
-     type == "Europe"		? sessionEu :			// Sesión en Europa
-     type == "Londres"		? sessionEu :			// Sesión en Londres
-     type == "Asia"			? sessionAs :			// Sesión en Asia
-     type == "Tokyo"		? sessionAs :			// Sesión en Shanghai
-     type == "Australia"	? sessionAu :			// Sesión en Australia
-     type == "Sydney"		? sessionAu :			// Sesión en Sydney
+    type == "New York"		? timeNewY	:			// Sesión New York
+     type == "NYSE"			? timeNYSE	:			// Sesión Nyse
+     type == "Chicago"		? timeChig	:			// Sesión Chicago
+     type == "Londres"		? timeLond	:			// Sesión Londres
+     type == "Tokyo"		? timeToky	:			// Sesión Shanghai
+     type == "Sydney"		? timeSydn	:			// Sesión Sydney
+     type == "US"			? timeUs	:			// Sesión Stock US
+     type == "Asia"			? timeAsia	:			// Sesión Asia
+     type == "Europe"		? timeEuro	:			// Sesión Europa
+     type == "América"		? timeAme	:			// Sesión América
+     type == "Australia"	? timeAus	:			// Sesión Australia
+     type == "Argentina"	? timeArge	:			// Sesión Argentina
      na
 
 //  ═══════════════
@@ -466,16 +477,15 @@ sessionS(type) =>
 
 ShowTableInform         = input(true, 'Info Table',             group = 'Table')
 
-
 //zones
-On_sesAsia              = math.sign(nz(time(timeframe.period,   sesTimeAsia,        'UTC-5')))
-On_sesEuro              = math.sign(nz(time(timeframe.period,   sesTimeEurope,      'UTC-5')))
-On_sesTokyo             = math.sign(nz(time(timeframe.period,   sesTimeTokyo,       'UTC-5')))
-On_sesShanghai          = math.sign(nz(time(timeframe.period,   sesTimeShanghai,    'UTC-5')))
-On_sesLondon            = math.sign(nz(time(timeframe.period,   sesTimeLondon,      'UTC-5')))
-On_sesNewyork           = math.sign(nz(time(timeframe.period,   sesTimeNewyork,     'UTC-5')))
-On_sesNYSE              = math.sign(nz(time(timeframe.period,   sesTimeNYSE,        'UTC-5')))
-On_sesSydney            = math.sign(nz(time(timeframe.period,   sesTimeSydney,      'UTC-5')))
+On_sesAsia              = math.sign(nz(time(timeframe.period,   timeAsia,		'UTC-5')))
+On_sesEuro              = math.sign(nz(time(timeframe.period,   timeEuro,		'UTC-5')))
+On_sesTokyo             = math.sign(nz(time(timeframe.period,   timeToky,		'UTC-5')))
+On_sesShanghai          = math.sign(nz(time(timeframe.period,   timeShan,		'UTC-5')))
+On_sesLondon            = math.sign(nz(time(timeframe.period,   timeLond,		'UTC-5')))
+On_sesNewyork           = math.sign(nz(time(timeframe.period,   timeNewY,		'UTC-5')))
+On_sesNYSE              = math.sign(nz(time(timeframe.period,   timeNYSE,		'UTC-5')))
+On_sesSydney            = math.sign(nz(time(timeframe.period,   timeSydn,		'UTC-5')))
 
 //High & Low Session Detector 
 LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
@@ -520,21 +530,21 @@ LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
     [High , Low ]
 
 if sesShowAsia 
-    [HighA, LowA]  = LowHighSessionDetector(On_sesAsia, colorSessAsia,sesTextAsia)
+    [HighA, LowA]  = LowHighSessionDetector(On_sesAsia, colorSessAsia,textAsia)
 if sesShowSydney 
-    [HighS, LowS]  = LowHighSessionDetector(On_sesSydney,colorSessSydney,sesTextSydney)
+    [HighS, LowS]  = LowHighSessionDetector(On_sesSydney,colorSessSydney,textSydney)
 if sesShowTokyo 
-    [HighT, LowT]  = LowHighSessionDetector(On_sesTokyo,colorSessTokyo,sesTextTokyo)
+    [HighT, LowT]  = LowHighSessionDetector(On_sesTokyo,colorSessTokyo,textTokyo)
 if sesShowShanghai 
-    [HighSh, LowSh]  = LowHighSessionDetector(On_sesShanghai,colorSessShanghai,sesTextShanghai)
-if sesShowEuro 
-    [HighE, LowE]  = LowHighSessionDetector(On_sesEuro,colorSessEuro,sesTextEuropa)
+    [HighSh, LowSh]  = LowHighSessionDetector(On_sesShanghai,colorSessShanghai,textShanghai)
+if sesShowEuropa 
+    [HighE, LowE]  = LowHighSessionDetector(On_sesEuro,colorSessEuro,textEuro)
 if sesShowLondon 
-    [HighL, LowL]  = LowHighSessionDetector(On_sesLondon,colorSessLondon,sesTextLondon)
+    [HighL, LowL]  = LowHighSessionDetector(On_sesLondon,colorSessLondon,textLondon)
 if sesShowNewyork 
-    [HighN, LowN]  = LowHighSessionDetector(On_sesNewyork,colorSessNewyork,sesTextNewyork)
+    [HighN, LowN]  = LowHighSessionDetector(On_sesNewyork,colorSessNewyork,textNewyork)
 if sesShowNYSE
-    [HighNY, LowNY]  = LowHighSessionDetector(On_sesNYSE,colorSessNYSE,sesTextNYSE)
+    [HighNY, LowNY]  = LowHighSessionDetector(On_sesNYSE,colorSessNYSE,textNYSE)
 
 //  ═══  Table Vars  ═══
 var Info_Table = table.new(position.top_right, 4, 10, bgcolor = #283c74, border_color = #53609bcb, border_width = 1, 
@@ -548,14 +558,14 @@ if ShowTableInform
     table.cell(Info_Table, 2, 1, 'Start(UTC)', text_color = color.white, text_size = size.small)
     table.cell(Info_Table, 3, 1, 'End(UTC)', text_color = color.white, text_size = size.small)
 
-    table.cell(Info_Table, 0, 2, sesTextAsia, text_color = colorSessAsia, text_size = size.small)
-    table.cell(Info_Table, 0, 3, sesTextSydney, text_color = colorSessSydney, text_size = size.small)
-    table.cell(Info_Table, 0, 4, sesTextTokyo, text_color = colorSessTokyo, text_size = size.small)
-    table.cell(Info_Table, 0, 5, sesTextShanghai, text_color = color.new(colorSessShanghai, 1), text_size = size.small)   
-    table.cell(Info_Table, 0, 6, sesTextEuropa, text_color = colorSessEuro, text_size = size.small)
-    table.cell(Info_Table, 0, 7, sesTextLondon, text_color = colorSessLondon, text_size = size.small)
-    table.cell(Info_Table, 0, 8, sesTextNewyork, text_color = colorSessNewyork, text_size = size.small)
-    table.cell(Info_Table, 0, 9, sesTextNYSE, text_color = colorSessNYSE, text_size = size.small)
+    table.cell(Info_Table, 0, 2, textAsia, text_color = colorSessAsia, text_size = size.small)
+    table.cell(Info_Table, 0, 3, textSydney, text_color = colorSessSydney, text_size = size.small)
+    table.cell(Info_Table, 0, 4, textTokyo, text_color = colorSessTokyo, text_size = size.small)
+    table.cell(Info_Table, 0, 5, textShanghai, text_color = color.new(colorSessShanghai, 1), text_size = size.small)   
+    table.cell(Info_Table, 0, 6, textEuro, text_color = colorSessEuro, text_size = size.small)
+    table.cell(Info_Table, 0, 7, textLondon, text_color = colorSessLondon, text_size = size.small)
+    table.cell(Info_Table, 0, 8, textNewyork, text_color = colorSessNewyork, text_size = size.small)
+    table.cell(Info_Table, 0, 9, textNYSE, text_color = colorSessNYSE, text_size = size.small)
 
     //  ═══  Table Display  ═══
     table.cell(Info_Table, 1, 2, (On_sesAsia ? 'Open' : 'Closed')
@@ -633,35 +643,35 @@ StartLine(Width) =>
 
 
 if  on_StartsesAsia
-    if sesShowStartAsia
+    if sesShowAsia
         StartLine( 2) 
         
 if  on_StartsesSydney
-    if sesShowStartSydney
+    if sesShowSydney
         StartLine(2) 
     
 if  on_StartsesTokyo
-    if sesShowStartTokyo
+    if sesShowTokyo
         StartLine(2) 
 
 if  on_StartsesShanghai
-    if sesShowStartShanghai
+    if sesShowShanghai
         StartLine(2) 
 
 if  on_StartsesEuro
-    if sesShowStartEuro
+    if sesShowEuropa
         StartLine(2) 
     
 if  on_StartsesLondon
-    if sesShowStartLondon
+    if sesShowLondon
         StartLine(2) 
         
 if  on_StartsesNewyork
-    if sesShowStartNewyork
+    if sesShowNewyork
         StartLine(2) 
     
 if  on_StartsesNYSE
-    if sesShowStartNYSE
+    if sesShowNYSE
         StartLine(2)
     
 
