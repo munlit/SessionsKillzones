@@ -305,16 +305,14 @@ color colorAxiSecondary		                = #282424           // AxiSecondary
 //  ═══  Lite  ═══
 //  ═══  Variables  ═══
 
-//  ═══  Checklist de Sesiones  ═══
+var grpTableInfo		= "═══ Area de Info ═══ "
 var grpSessTokyo		= " Tokyo"
 var grpSessSydney		= " Sydney"
 var grpSessLondon		= " London"
 var grpSessNewYork		= " New York"
 var grpSessNYSE			= " NYSE"
 
-//  ═══  Información  ═══
-var grpTableInfo		= " ═══ Sesiones Operativas ═══ "
-ShowTableInform         = input(defval = false,							title = "Visualizar Información",						group = grpTableInfo)
+ShowTableInform         = input(defval = false,							title = "Tabla de Información",						group = grpTableInfo)
 
 sesShowSydney           = input(defval = false,         				title = "",    			inline = "sessSyd",     		group = grpSessSydney) 
 sesShowTokyo            = input(defval = true,          				title = "",	    		inline = "sessTko",     		group = grpSessTokyo) 
@@ -344,16 +342,17 @@ killTimeOpen			= input.session("0900-1030",    				title = "",				inline = "seO"
 killTimeRally			= input.session("1130-1145",    				title = "",				inline = "seR",					group = grpKillZ)
 killTimeEnd				= input.session("1230-1430",    				title = "",				inline = "seE",					group = grpKillZ)
 
-colorSessSydney         = input(color.new(colorAmeritradeGrayAluminum, 40),      	title = "",        		inline = 'sessSyd',				group = grpSessSydney)
-colorSessTokyo          = input(color.new(colorGrayScaleSecondaryLavender, 40),		title = "",        		inline = 'sessTko',				group = grpSessTokyo)
-colorSessLondon         = input(color.new(colorBrightYellow10, 40),              	title = "",        		inline = 'sessLdn',				group = grpSessLondon)
-colorSessNewyork        = input(color.new(colorUltrMenta30, 40),                 	title = "",        		inline = 'sessNy',				group = grpSessNewYork)
-colorSessNYSE           = input(color.new(colorUltrBlueSky20, 40),               	title = "",        		inline = 'sessNYS',				group = grpSessNYSE)
+colorSessSydney         = input(color.new(colorAmeritradeGrayAluminum, 40),      		title = "",        			inline = 'sessSyd',				group = grpSessSydney)
+colorSessTokyo          = input(color.new(colorUltrRose20, 40),							title = "",        			inline = 'sessTko',				group = grpSessTokyo)
+colorSessLondon         = input(color.new(colorBrightYellow10, 40),              		title = "",        			inline = 'sessLdn',				group = grpSessLondon)
+colorSessNewyork        = input(color.new(colorUltrMenta30, 40),                 		title = "",        			inline = 'sessNy',				group = grpSessNewYork)
+colorSessNYSE           = input(color.new(colorUltrBlueSky20, 40),               		title = "",        			inline = 'sessNYS',				group = grpSessNYSE)
 
 colorTableOpen    		= input.color(color.new(colorTvLightGreen50, 25),				title = "Opem",				inline = "table",				group = grpTableInfo)		//  tooltip = color Open
 colorTableClose   		= input.color(color.new(colorTvNitRed40, 25),					title = "Close",			inline = "table",				group = grpTableInfo)		//  tooltip = color Close
-colorTableBackG			= input.color(color.new(colorAxi413dab8, 25),					title = "Back",				inline = "table",				group = grpTableInfo)		//  tooltip = color Background
-colorTableText			= input.color(color.new(colorGrayScalewebBackground, 25),		title = "Text",				inline = "table",				group = grpTableInfo)		//  tooltip = color Text
+colorTableBackG			= input.color(color.new(colorAxi413dab8, 50),					title = "Back",				inline = "table",				group = grpTableInfo)		//  tooltip = color Background
+colorTableText			= input.color(color.new(colorGrayScalewebBackground, 20),		title = "Text",				inline = "table",				group = grpTableInfo)		//  tooltip = color Text
+colorTableXtra			= input.color(color.new(colorAmeritradeGrayAluminum, 75),		title = "Xtra",				inline = "table",				group = grpTableInfo)		//  tooltip = color Xtra
 
 
 //  ═══  Titulo de Area  ═══
@@ -391,6 +390,7 @@ string timeSydn				= "Australia/Sydney" 					//	'UTC+10'	"Australia/Sydney"
 //  ═══  Options  ═══
 
 optionLines		= input.string  (defval="Puntos",		title="Linea",    		options = ["Continua", "Guiones", "Puntos"])
+optionTextSize	= input.string  (defval="Small",		title="Tamaño",    		options = ["Tiny", "Small", "Auto", "Normal"])
 
 optionSession	= input.string  (defval="Chicago",		title="Sesiones",    	options = ["New York", "Chicago", "NYSE", "Londres", "Tokyo", "Sydney, Argentina"])
 optionKillZ		= input.string  (defval="Chicago",		title="KillZones",    	options = ["New York", "Chicago", "NYSE", "Londres", "Tokyo", "Sydney, Argentina"])
@@ -428,6 +428,12 @@ string switchLines = switch optionLines
 	"Guiones"	 => line.style_dashed
 	"Puntos"	 => line.style_dotted
 	=> line.style_solid	
+
+string switchText = switch optionTextSize
+	"Auto"		=> size.auto
+	"Tiny"		=> size.tiny
+	"Small"		=> size.small
+	"Normal"	=> size.normal
 
 string switchSession = switch optionSession
 	"New York"	 => timeNewY				
@@ -489,12 +495,12 @@ LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
         Bar         := 0
 
     if On_Session > On_Session[1]
-        BoX				:= box.new(bar_index, High, bar_index, Low, bgcolor = color.new(Color_Session, 95),
-         border_color	= color.new(Color_Session, 40),
+        BoX				:= box.new(bar_index, High, bar_index, Low, bgcolor = color.new(Color_Session, 97),
+         border_color	= color.new(Color_Session, 35),
 		 border_width	= 2 , 
          border_style	= switchLines)
         
-        LabeL 			:= label.new(Bar, High , text = Text_Session ,xloc = xloc.bar_index, yloc = yloc.price, size = size.small ,
+        LabeL 			:= label.new(Bar, High , text = Text_Session ,xloc = xloc.bar_index, yloc = yloc.price, size = switchText ,
          style 			= (Text_Session	== 'Sydney' or Text_Session == 'London' ) ? label.style_label_lower_right  : 
          Text_Session	== 'Asia' ?  label.style_label_down :  label.style_label_lower_left,
          textcolor		= Color_Session,				color = color.rgb(255, 255, 255, 100))
@@ -520,41 +526,41 @@ if sesShowNYSE
     [HighNY, LowNY]		= LowHighSessionDetector(On_sesNYSE,	colorSessNYSE,		textNYSE)
 
 //  ═══  Table Vars  ═══
-var Info_Table = table.new(position.top_right, 4, 10, bgcolor = #283c74, border_color = #53609bcb, border_width = 1, 
+var Info_Table = table.new(position.top_right, 4, 10, bgcolor = colorTableBackG, border_color = colorTableXtra, border_width = 1, 
  frame_color = #373a46 , frame_width = 1)
 
 if ShowTableInform
-    table.cell(Info_Table, 0, 0,	'Sesiones Abiertas',					text_color = color.white,			text_size = size.small)
+    table.cell(Info_Table, 0, 0,	'Sesiones Abiertas',					text_color = colorTableText,			text_size = switchText)
     table.merge_cells(Info_Table, 0, 0, 3, 0)
-    table.cell(Info_Table, 0, 1,	'Session',								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 1, 1,	'Status',								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 2, 1,	'Inicio',								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 3, 1,	'Cierre',								text_color = color.white,			text_size = size.small)
+    table.cell(Info_Table, 0, 1,	'Session',								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 1, 1,	'Status',								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 2, 1,	'Inicio',								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 3, 1,	'Cierre',								text_color = colorTableText,			text_size = switchText)
 
-    table.cell(Info_Table, 0, 2,	textSydney,								text_color = colorSessSydney,		text_size = size.small)
-    table.cell(Info_Table, 0, 3,	textTokyo,								text_color = colorSessTokyo,		text_size = size.small)
-    table.cell(Info_Table, 0, 4,	textLondon,								text_color = colorSessLondon,		text_size = size.small)
-    table.cell(Info_Table, 0, 5,	textNewyork,							text_color = colorSessNewyork,		text_size = size.small)
-    table.cell(Info_Table, 0, 6,	textNYSE,								text_color = colorSessNYSE,			text_size = size.small)
+    table.cell(Info_Table, 0, 2,	textSydney,								text_color = colorSessSydney,			text_size = switchText)
+    table.cell(Info_Table, 0, 3,	textTokyo,								text_color = colorSessTokyo,			text_size = switchText)
+    table.cell(Info_Table, 0, 4,	textLondon,								text_color = colorSessLondon,			text_size = switchText)
+    table.cell(Info_Table, 0, 5,	textNewyork,							text_color = colorSessNewyork,			text_size = switchText)
+    table.cell(Info_Table, 0, 6,	textNYSE,								text_color = colorSessNYSE,				text_size = switchText)
 
     //  ═══  Table Display  ═══
-    table.cell(Info_Table, 1, 2,	(On_sesSydney	? 'Open' : 'Closed'),	bgcolor = On_sesSydney	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = size.small)
-    table.cell(Info_Table, 1, 3,	(On_sesTokyo	? 'Open' : 'Closed'),	bgcolor = On_sesTokyo	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = size.small)
-    table.cell(Info_Table, 1, 4,	(On_sesLondon	? 'Open' : 'Closed'),	bgcolor = On_sesLondon	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = size.small)
-    table.cell(Info_Table, 1, 5,	(On_sesNewyork	? 'Open' : 'Closed'),	bgcolor = On_sesNewyork	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = size.small)
-    table.cell(Info_Table, 1, 6,	(On_sesNYSE		? 'Open' : 'Closed'),	bgcolor = On_sesNYSE	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = size.small)
+    table.cell(Info_Table, 1, 2,	(On_sesSydney	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesSydney	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 3,	(On_sesTokyo	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesTokyo	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 4,	(On_sesLondon	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesLondon	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 5,	(On_sesNewyork	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesNewyork	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 6,	(On_sesNYSE		? 'Abierto' : 'Cerrado'),	bgcolor = On_sesNYSE	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
 
-    table.cell(Info_Table, 2, 2,	'23:00' ,								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 2, 3,	'23:00' ,								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 2, 4,	'00:00' ,								text_color = color.white,			text_size = size.small) 
-    table.cell(Info_Table, 2, 5,	'01:30' ,								text_color = color.white,			text_size = size.small)  
-    table.cell(Info_Table, 2, 6,	'07:00' ,								text_color = color.white,			text_size = size.small)
+    table.cell(Info_Table, 2, 2,	'17:00' ,								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 2, 3,	'18:00' ,								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 2, 4,	'02:00' ,								text_color = colorTableText,			text_size = switchText) 
+    table.cell(Info_Table, 2, 5,	'07:00' ,								text_color = colorTableText,			text_size = switchText)  
+    table.cell(Info_Table, 2, 6,	'08:30' ,								text_color = colorTableText,			text_size = switchText)
 
-    table.cell(Info_Table, 3, 2,	'06:00' ,								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 3, 3,	'05:00' ,								text_color = color.white,			text_size = size.small)
-    table.cell(Info_Table, 3, 4,	'06:00' ,								text_color = color.white,			text_size = size.small) 
-    table.cell(Info_Table, 3, 5,	'06:57' ,								text_color = color.white,			text_size = size.small)  
-    table.cell(Info_Table, 3, 6,	'16:30' ,								text_color = color.white,			text_size = size.small)
+    table.cell(Info_Table, 3, 2,	'02:00' ,								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 3, 3,	'03:00' ,								text_color = colorTableText,			text_size = switchText)
+    table.cell(Info_Table, 3, 4,	'11:00' ,								text_color = colorTableText,			text_size = switchText) 
+    table.cell(Info_Table, 3, 5,	'15:57' ,								text_color = colorTableText,			text_size = switchText)  
+    table.cell(Info_Table, 3, 6,	'15:00' ,								text_color = colorTableText,			text_size = switchText)
 
 //  ═══  Show Open Time  ═══
 
