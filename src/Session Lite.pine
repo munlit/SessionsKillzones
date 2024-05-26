@@ -333,14 +333,14 @@ sesShowAlva       		= input(defval = false,     					title = "",			   	inline = 
 sesShowPre     			= input(defval = false,     					title = "",				inline = "seP",   				group = grpKillZ,			tooltip = "Pre Mercado")
 sesShowOpen      		= input(defval = true,      					title = "",				inline = "seO",   				group = grpKillZ,			tooltip = "Apertura")
 sesShowRally   			= input(defval = true,      					title = "",				inline = "seR",   				group = grpKillZ,			tooltip = "Corrección") 
-sesShowEnd       		= input(defval = true,      					title = "",				inline = "seE",   				group = grpKillZ,			tooltip = "Cierre") 
+sesShowClose       		= input(defval = true,      					title = "",				inline = "seE",   				group = grpKillZ,			tooltip = "Cierre") 
 
 //  ═══  KillZone  ═══
 killTimeAlva			= input.session("0400-0530",    				title = "",				inline = "seA",					group = grpKillZ)
 killTimePre				= input.session("0700-0745",    				title = "",				inline = "seP",					group = grpKillZ)
 killTimeOpen			= input.session("0900-1030",    				title = "",				inline = "seO",					group = grpKillZ)
 killTimeRally			= input.session("1130-1145",    				title = "",				inline = "seR",					group = grpKillZ)
-killTimeEnd				= input.session("1230-1430",    				title = "",				inline = "seE",					group = grpKillZ)
+killTimeClose			= input.session("1230-1430",    				title = "",				inline = "seE",					group = grpKillZ)
 
 colorSessSydney         = input(color.new(colorAmeritradeGrayAluminum, 40),      		title = "",        			inline = 'sessSyd',				group = grpSessSydney)
 colorSessTokyo          = input(color.new(colorUltrRose20, 40),							title = "",        			inline = 'sessTko',				group = grpSessTokyo)
@@ -348,11 +348,11 @@ colorSessLondon         = input(color.new(colorBrightYellow10, 40),             
 colorSessNewyork        = input(color.new(colorUltrMenta30, 40),                 		title = "",        			inline = 'sessNy',				group = grpSessNewYork)
 colorSessNYSE           = input(color.new(colorUltrBlueSky20, 40),               		title = "",        			inline = 'sessNYS',				group = grpSessNYSE)
 
-colorTableOpen    		= input.color(color.new(colorTvLightGreen50, 25),				title = "Opem",				inline = "table",				group = grpTableInfo)		//  tooltip = color Open
-colorTableClose   		= input.color(color.new(colorTvNitRed40, 25),					title = "Close",			inline = "table",				group = grpTableInfo)		//  tooltip = color Close
-colorTableBackG			= input.color(color.new(colorAxi413dab8, 50),					title = "Back",				inline = "table",				group = grpTableInfo)		//  tooltip = color Background
-colorTableText			= input.color(color.new(colorGrayScalewebBackground, 20),		title = "Text",				inline = "table",				group = grpTableInfo)		//  tooltip = color Text
-colorTableXtra			= input.color(color.new(colorAmeritradeGrayAluminum, 75),		title = "Xtra",				inline = "table",				group = grpTableInfo)		//  tooltip = color Xtra
+colorTableOpen    		= input.color(color.new(colorTvLightGreen50, 25),				tooltip = "Opem",				inline = "table",				group = grpTableInfo)		//  title = color Open
+colorTableClose   		= input.color(color.new(colorTvNitRed40, 25),					tooltip = "Close",				inline = "table",				group = grpTableInfo)		//  title = color Close
+colorTableBackG			= input.color(color.new(colorAxi413dab8, 50),					tooltip = "Back",				inline = "table",				group = grpTableInfo)		//  title = color Fondo
+colorTableText			= input.color(color.new(colorGrayScalewebBackground, 20),		tooltip = "Text",				inline = "table",				group = grpTableInfo)		//  title = color Texto
+colorTableXtra			= input.color(color.new(colorAmeritradeGrayAluminum, 75),		tooltip = "Xtra",				inline = "table",				group = grpTableInfo)		//  title = color Lineas
 
 
 //  ═══  Titulo de Area  ═══
@@ -463,15 +463,21 @@ ohl = OHL.new()
 //  ═══  Lite  ═══
 //  ═══  Maths  ═══
 
-//zones
-
+//  ═══  Sessions  ═══
 On_sesTokyo             = math.sign(nz(time(timeframe.period,   sesTimeTokyo,		switchSession)))
 On_sesLondon            = math.sign(nz(time(timeframe.period,   sesTimeLondon,		switchSession)))
 On_sesNewyork           = math.sign(nz(time(timeframe.period,   sesTimeNewyork,		switchSession)))
 On_sesNYSE              = math.sign(nz(time(timeframe.period,   sesTimeNYSE,		switchSession)))
 On_sesSydney            = math.sign(nz(time(timeframe.period,   sesTimeSydney,		switchSession)))
 
-//High & Low Session Detector 
+//  ═══  KillZones  ═══
+onKillZoneAlva			= math.sign(nz(time(timeframe.period,   sesTimeAlva,		switchKillZone)))
+onKillZonePre			= math.sign(nz(time(timeframe.period,   sesTimePre,			switchKillZone)))
+onKillZoneOpen			= math.sign(nz(time(timeframe.period,   sesTimeOpen,		switchKillZone)))
+onKillZoneRally			= math.sign(nz(time(timeframe.period,   sesTimeRally,		switchKillZone)))
+onKillZoneClose			= math.sign(nz(time(timeframe.period,   sesTimeClose,		switchKillZone)))
+
+//  ═══  High & Low Sessions  ═══
 LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
 
     var int Bar     = 0
@@ -525,6 +531,60 @@ if sesShowNewyork
 if sesShowNYSE
     [HighNY, LowNY]		= LowHighSessionDetector(On_sesNYSE,	colorSessNYSE,		textNYSE)
 
+//  ═══  High & Low KillZones  ═══
+LowHighKillZones(On_Killzones, Color_Killzones, Text_Killzones) =>
+
+    var int Bar     = 0
+    var float High  = 0.0 
+    var float Low   = 0.0
+    var box BoX     = na
+    var label LabeL = na 
+
+    if  (On_Killzones[1] == 0 and On_Killzones == 1)
+        Bar         := bar_index
+        High        := high
+        Low         := low
+
+    else if (On_Killzones[1] == 1 and On_Killzones == 1)
+        High        := math.max(high , High) 
+        Low         := math.min(low , Low)
+
+    else if On_Killzones == 0
+        High        := 0.0 
+        Low         := 0.0
+        Bar         := 0
+
+    if On_Killzones > On_Killzones[1]
+        BoX				:= box.new(bar_index, High, bar_index, Low, bgcolor = color.new(Color_Killzones, 97),
+         border_color	= color.new(Color_Killzones, 35),
+		 border_width	= 2 , 
+         border_style	= switchLines)
+        
+        LabeL 			:= label.new(Bar, High , text = Text_Killzones ,xloc = xloc.bar_index, yloc = yloc.price, size = switchText ,
+         style 			= (Text_Killzones	== 'Sydney' or Text_Killzones == 'London' ) ? label.style_label_lower_right  : 
+         Text_Killzones	== 'Asia' ?  label.style_label_down :  label.style_label_lower_left,
+         textcolor		= Color_Killzones,				color = color.rgb(255, 255, 255, 100))
+
+    if On_Killzones and On_Killzones == On_Killzones[1]
+        box.set_top(BoX, High)
+        box.set_bottom(BoX, Low)
+        box.set_right(BoX, bar_index)
+        label.set_x(LabeL,math.round(math.avg(Bar,bar_index)))
+        label.set_y(LabeL, High)
+
+    [High , Low ]
+
+if sesShowSydney 
+    [HighS, LowS]		= LowHighKillZones(onKillZoneAlva,	colorSessSydney,	textSydney)
+if sesShowTokyo 
+    [HighT, LowT]		= LowHighKillZones(onKillZonePre,	colorSessTokyo,		textTokyo)
+if sesShowLondon 
+    [HighL, LowL]		= LowHighKillZones(onKillZoneOpen,	colorSessLondon,	textLondon)
+if sesShowNewyork 
+    [HighN, LowN]		= LowHighKillZones(onKillZoneRally,	colorSessNewyork,	textNewyork)
+if sesShowNYSE
+    [HighNY, LowNY]		= LowHighKillZones(onKillZoneClose,	colorSessNYSE,		textNYSE)
+
 //  ═══  Table Vars  ═══
 var Info_Table = table.new(position.top_right, 4, 10, bgcolor = colorTableBackG, border_color = colorTableXtra, border_width = 1, 
  frame_color = #373a46 , frame_width = 1)
@@ -544,11 +604,11 @@ if ShowTableInform
     table.cell(Info_Table, 0, 6,	textNYSE,								text_color = colorSessNYSE,				text_size = switchText)
 
     //  ═══  Table Display  ═══
-    table.cell(Info_Table, 1, 2,	(On_sesSydney	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesSydney	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
-    table.cell(Info_Table, 1, 3,	(On_sesTokyo	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesTokyo	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
-    table.cell(Info_Table, 1, 4,	(On_sesLondon	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesLondon	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
-    table.cell(Info_Table, 1, 5,	(On_sesNewyork	? 'Abierto' : 'Cerrado'),	bgcolor = On_sesNewyork	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
-    table.cell(Info_Table, 1, 6,	(On_sesNYSE		? 'Abierto' : 'Cerrado'),	bgcolor = On_sesNYSE	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 2,	(On_sesSydney	? 'Open' : 'Closed'),	bgcolor = On_sesSydney	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 3,	(On_sesTokyo	? 'Open' : 'Closed'),	bgcolor = On_sesTokyo	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 4,	(On_sesLondon	? 'Open' : 'Closed'),	bgcolor = On_sesLondon	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 5,	(On_sesNewyork	? 'Open' : 'Closed'),	bgcolor = On_sesNewyork	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
+    table.cell(Info_Table, 1, 6,	(On_sesNYSE		? 'Open' : 'Closed'),	bgcolor = On_sesNYSE	? colorTableOpen : colorTableClose,	text_color = colorTableText,	text_size = switchText)
 
     table.cell(Info_Table, 2, 2,	'17:00' ,								text_color = colorTableText,			text_size = switchText)
     table.cell(Info_Table, 2, 3,	'18:00' ,								text_color = colorTableText,			text_size = switchText)
@@ -564,11 +624,11 @@ if ShowTableInform
 
 //  ═══  Show Open Time  ═══
 
-on_StartsesSydney   	= math.sign(nz(time(timeframe.period, '1800-1802' , switchSession)))
-on_StartsesTokyo    	= math.sign(nz(time(timeframe.period, '1800-1802' , switchSession)))
-on_StartsesLondon   	= math.sign(nz(time(timeframe.period, '0300-0302' , switchSession)))
-on_StartsesNewyork  	= math.sign(nz(time(timeframe.period, '0700-0702' , switchSession)))
-on_StartsesNYSE     	= math.sign(nz(time(timeframe.period, '0830-0832' , switchSession)))
+on_StartsesSydney   	= math.sign(nz(time(timeframe.period, '1800-1801' , switchSession)))
+on_StartsesTokyo    	= math.sign(nz(time(timeframe.period, '1800-1801' , switchSession)))
+on_StartsesLondon   	= math.sign(nz(time(timeframe.period, '0300-0301' , switchSession)))
+on_StartsesNewyork  	= math.sign(nz(time(timeframe.period, '0700-0701' , switchSession)))
+on_StartsesNYSE     	= math.sign(nz(time(timeframe.period, '0830-0831' , switchSession)))
 
 StartLine(Width) =>
     StartLine = line.new(bar_index, open - 1 , bar_index, open + 1 , xloc.bar_index, extend.both, #aeafb196 , line.style_dotted, Width)
