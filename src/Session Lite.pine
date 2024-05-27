@@ -329,18 +329,18 @@ sesTimeNYSE             = input.session("0830-1500:23456",    			title = "",    
 
 //  ═══  KillZones segun Sesion  ═══
 var grpKillZ			= " ═══ KillZones ═══ "
-sesShowAlva       		= input(defval = false,     					title = "",			   	inline = "seA",   				group = grpKillZ,			tooltip = "Alva")
-sesShowPre     			= input(defval = false,     					title = "",				inline = "seP",   				group = grpKillZ,			tooltip = "Pre Mercado")
-sesShowOpen      		= input(defval = true,      					title = "",				inline = "seO",   				group = grpKillZ,			tooltip = "Apertura")
-sesShowRally   			= input(defval = true,      					title = "",				inline = "seR",   				group = grpKillZ,			tooltip = "Corrección") 
-sesShowClose       		= input(defval = true,      					title = "",				inline = "seE",   				group = grpKillZ,			tooltip = "Cierre") 
+killShowAlva       		= input(defval = false,     					title = "",			   	inline = "seA",   				group = grpKillZ,			tooltip = "Alva")
+killShowPre     		= input(defval = false,     					title = "",				inline = "seP",   				group = grpKillZ,			tooltip = "Pre Mercado")
+killShowOpen      		= input(defval = true,      					title = "",				inline = "seO",   				group = grpKillZ,			tooltip = "Apertura")
+killShowRally   		= input(defval = true,      					title = "",				inline = "seR",   				group = grpKillZ,			tooltip = "Corrección") 
+killShowClose       	= input(defval = true,      					title = "",				inline = "seE",   				group = grpKillZ,			tooltip = "Cierre") 
 
 //  ═══  KillZone  ═══
-killTimeAlva			= input.session("0400-0530",    				title = "",				inline = "seA",					group = grpKillZ)
-killTimePre				= input.session("0700-0745",    				title = "",				inline = "seP",					group = grpKillZ)
-killTimeOpen			= input.session("0900-1030",    				title = "",				inline = "seO",					group = grpKillZ)
-killTimeRally			= input.session("1130-1145",    				title = "",				inline = "seR",					group = grpKillZ)
-killTimeClose			= input.session("1230-1430",    				title = "",				inline = "seE",					group = grpKillZ)
+killTimeAlva			= input.session("0400-0530:123456",    			title = "",				inline = "seA",					group = grpKillZ)
+killTimePre				= input.session("0700-0745:123456",    			title = "",				inline = "seP",					group = grpKillZ)
+killTimeOpen			= input.session("0900-1045:123456",    			title = "",				inline = "seO",					group = grpKillZ)
+killTimeRally			= input.session("1130-1145:123456",    			title = "",				inline = "seR",					group = grpKillZ)
+killTimeClose			= input.session("1230-1345:123456",    			title = "",				inline = "seE",					group = grpKillZ)
 
 colorSessSydney         = input(color.new(colorAmeritradeGrayAluminum, 40),      		title = "",        			inline = 'sessSyd',				group = grpSessSydney)
 colorSessTokyo          = input(color.new(colorUltrRose20, 40),							title = "",        			inline = 'sessTko',				group = grpSessTokyo)
@@ -353,7 +353,6 @@ colorTableClose   		= input.color(color.new(colorTvNitRed40, 25),					tooltip = 
 colorTableBackG			= input.color(color.new(colorAxi413dab8, 50),					tooltip = "Back",				inline = "table",				group = grpTableInfo)		//  title = color Fondo
 colorTableText			= input.color(color.new(colorGrayScalewebBackground, 20),		tooltip = "Text",				inline = "table",				group = grpTableInfo)		//  title = color Texto
 colorTableXtra			= input.color(color.new(colorAmeritradeGrayAluminum, 75),		tooltip = "Xtra",				inline = "table",				group = grpTableInfo)		//  title = color Lineas
-
 
 //  ═══  Titulo de Area  ═══
 var grpSmc		       = " ═══ Día ═══ "
@@ -471,11 +470,11 @@ On_sesNYSE              = math.sign(nz(time(timeframe.period,   sesTimeNYSE,		sw
 On_sesSydney            = math.sign(nz(time(timeframe.period,   sesTimeSydney,		switchSession)))
 
 //  ═══  KillZones  ═══
-onKillZoneAlva			= math.sign(nz(time(timeframe.period,   sesTimeAlva,		switchKillZone)))
-onKillZonePre			= math.sign(nz(time(timeframe.period,   sesTimePre,			switchKillZone)))
-onKillZoneOpen			= math.sign(nz(time(timeframe.period,   sesTimeOpen,		switchKillZone)))
-onKillZoneRally			= math.sign(nz(time(timeframe.period,   sesTimeRally,		switchKillZone)))
-onKillZoneClose			= math.sign(nz(time(timeframe.period,   sesTimeClose,		switchKillZone)))
+onKillZoneAlva			= math.sign(nz(time(timeframe.period,   killTimeAlva,		switchKillZone)))
+onKillZonePre			= math.sign(nz(time(timeframe.period,   killTimePre,		switchKillZone)))
+onKillZoneOpen			= math.sign(nz(time(timeframe.period,   killTimeOpen,		switchKillZone)))
+onKillZoneRally			= math.sign(nz(time(timeframe.period,   killTimeRally,		switchKillZone)))
+onKillZoneClose			= math.sign(nz(time(timeframe.period,   killTimeClose,		switchKillZone)))
 
 //  ═══  High & Low Sessions  ═══
 LowHighSessionDetector(On_Session, Color_Session, Text_Session) =>
@@ -532,7 +531,7 @@ if sesShowNYSE
     [HighNY, LowNY]		= LowHighSessionDetector(On_sesNYSE,	colorSessNYSE,		textNYSE)
 
 //  ═══  High & Low KillZones  ═══
-LowHighKillZones(On_Killzones, Color_Killzones, Text_Killzones) =>
+LowHighKillZones(onKillZones, colorKillZones) =>
 
     var int Bar     = 0
     var float High  = 0.0 
@@ -540,32 +539,27 @@ LowHighKillZones(On_Killzones, Color_Killzones, Text_Killzones) =>
     var box BoX     = na
     var label LabeL = na 
 
-    if  (On_Killzones[1] == 0 and On_Killzones == 1)
+    if  (onKillZones[1] == 0 and onKillZones == 1)
         Bar         := bar_index
         High        := high
         Low         := low
 
-    else if (On_Killzones[1] == 1 and On_Killzones == 1)
+    else if (onKillZones[1] == 1 and onKillZones == 1)
         High        := math.max(high , High) 
         Low         := math.min(low , Low)
 
-    else if On_Killzones == 0
+    else if onKillZones == 0
         High        := 0.0 
         Low         := 0.0
         Bar         := 0
 
-    if On_Killzones > On_Killzones[1]
-        BoX				:= box.new(bar_index, High, bar_index, Low, bgcolor = color.new(Color_Killzones, 97),
-         border_color	= color.new(Color_Killzones, 35),
-		 border_width	= 2 , 
+    if onKillZones > onKillZones[1]
+        BoX				:= box.new(bar_index, High, bar_index, Low, bgcolor = color.new(colorKillZones, 85),
+         border_color	= color.new(colorKillZones, 75),
+		 border_width	= 1, 
          border_style	= switchLines)
-        
-        LabeL 			:= label.new(Bar, High , text = Text_Killzones ,xloc = xloc.bar_index, yloc = yloc.price, size = switchText ,
-         style 			= (Text_Killzones	== 'Sydney' or Text_Killzones == 'London' ) ? label.style_label_lower_right  : 
-         Text_Killzones	== 'Asia' ?  label.style_label_down :  label.style_label_lower_left,
-         textcolor		= Color_Killzones,				color = color.rgb(255, 255, 255, 100))
 
-    if On_Killzones and On_Killzones == On_Killzones[1]
+    if onKillZones and onKillZones == onKillZones[1]
         box.set_top(BoX, High)
         box.set_bottom(BoX, Low)
         box.set_right(BoX, bar_index)
@@ -574,16 +568,16 @@ LowHighKillZones(On_Killzones, Color_Killzones, Text_Killzones) =>
 
     [High , Low ]
 
-if sesShowSydney 
-    [HighS, LowS]		= LowHighKillZones(onKillZoneAlva,	colorSessSydney,	textSydney)
-if sesShowTokyo 
-    [HighT, LowT]		= LowHighKillZones(onKillZonePre,	colorSessTokyo,		textTokyo)
-if sesShowLondon 
-    [HighL, LowL]		= LowHighKillZones(onKillZoneOpen,	colorSessLondon,	textLondon)
-if sesShowNewyork 
-    [HighN, LowN]		= LowHighKillZones(onKillZoneRally,	colorSessNewyork,	textNewyork)
-if sesShowNYSE
-    [HighNY, LowNY]		= LowHighKillZones(onKillZoneClose,	colorSessNYSE,		textNYSE)
+if killShowAlva
+    [HighS, LowS]		= LowHighKillZones(onKillZoneAlva,	colorSessSydney)
+if killShowPre
+    [HighT, LowT]		= LowHighKillZones(onKillZonePre,	colorSessTokyo)
+if killShowOpen
+    [HighL, LowL]		= LowHighKillZones(onKillZoneOpen,	colorSessLondon)
+if killShowRally
+    [HighN, LowN]		= LowHighKillZones(onKillZoneRally,	colorSessNewyork)
+if killShowClose
+    [HighNY, LowNY]		= LowHighKillZones(onKillZoneClose,	colorSessNYSE)
 
 //  ═══  Table Vars  ═══
 var Info_Table = table.new(position.top_right, 4, 10, bgcolor = colorTableBackG, border_color = colorTableXtra, border_width = 1, 
