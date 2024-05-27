@@ -348,11 +348,11 @@ colorSessLondon         = input(color.new(colorBrightYellow10, 40),             
 colorSessNewyork        = input(color.new(colorUltrMenta30, 40),                 		title = "",        			inline = 'sessNy',				group = grpSessNewYork)
 colorSessNYSE           = input(color.new(colorUltrBlueSky20, 40),               		title = "",        			inline = 'sessNYS',				group = grpSessNYSE)
 
-colorTableOpen    		= input.color(color.new(colorTvLightGreen50, 25),				tooltip = "Opem",				inline = "table",				group = grpTableInfo)		//  title = color Open
-colorTableClose   		= input.color(color.new(colorTvNitRed40, 25),					tooltip = "Close",				inline = "table",				group = grpTableInfo)		//  title = color Close
-colorTableBackG			= input.color(color.new(colorAxi413dab8, 50),					tooltip = "Back",				inline = "table",				group = grpTableInfo)		//  title = color Fondo
-colorTableText			= input.color(color.new(colorGrayScalewebBackground, 20),		tooltip = "Text",				inline = "table",				group = grpTableInfo)		//  title = color Texto
-colorTableXtra			= input.color(color.new(colorAmeritradeGrayAluminum, 75),		tooltip = "Xtra",				inline = "table",				group = grpTableInfo)		//  title = color Lineas
+colorTableOpen    		= input.color(color.new(colorTvLightGreen50, 25),				title = "",					inline = "table",				group = grpTableInfo)			// tooltip = "Open"
+colorTableClose   		= input.color(color.new(colorTvNitRed40, 25),					title = "",					inline = "table",				group = grpTableInfo)			// tooltip = "Close"
+colorTableBackG			= input.color(color.new(colorAxi413dab8, 50),					title = "",					inline = "table",				group = grpTableInfo)			// tooltip = "Fondo"
+colorTableText			= input.color(color.new(colorGrayScalewebBackground, 20),		title = "",					inline = "table",				group = grpTableInfo)			// tooltip = "Texto"
+colorTableXtra			= input.color(color.new(colorAmeritradeGrayAluminum, 75),		title = "",					inline = "table",				group = grpTableInfo)			// tooltip = "Lineas"
 
 //  ═══  Titulo de Area  ═══
 var grpSmc		       = " ═══ Día ═══ "
@@ -375,7 +375,7 @@ string timeEuro				= "UTC+1"								//	"Europe/London"
 string timeAus				= "UTC+10"								//	"Australia/Sydney"
 string timeUs				= "UTC-4"								//	"America/New_York"
 
-string timeNYSE				= "America/Chicago"						//	'UTC-5'		"America/Chicago"
+string timeNYSE				= "UTC-5"								//	'UTC-5'		"America/Chicago"
 string timeNewY				= "America/New_York"					//	'UTC.4'		"America/New_York"
 string timeChig				= "America/Chicago"						//	'UTC-5'		"America/Chicago"
 string timeArge				= "America/Argentina/Buenos_Aires"		//	'UTC-3'		"America/Argentina/Buenos_Aires"
@@ -405,11 +405,10 @@ type OHL
     float C = close
     float V = volume
 
-lineStyle(lineL) =>
-    switch lineL
-        'Solid'  => line.style_solid
-        'Dashed' => line.style_dashed
-        'Dotted' => line.style_dotted
+lineStyle(lineL) => switch lineL
+	'Solid'  => line.style_solid
+	'Dashed' => line.style_dashed
+	'Dotted' => line.style_dotted
 
 labelStyle(sizeZ) =>
     switch sizeZ
@@ -423,9 +422,9 @@ labelStyle(sizeZ) =>
 //  ═══  Switch  ═══
 
 string switchLines = switch optionLines
-	"Continua"	 => line.style_solid
-	"Guiones"	 => line.style_dashed
-	"Puntos"	 => line.style_dotted
+	"Continua"	 => line.style_solid			//  Solid
+	"Guiones"	 => line.style_dashed			//  Dashed
+	"Puntos"	 => line.style_dotted			//  Dotted
 	=> line.style_solid	
 
 string switchText = switch optionTextSize
@@ -435,19 +434,23 @@ string switchText = switch optionTextSize
 	"Normal"	=> size.normal
 
 string switchSession = switch optionSession
-	"New York"	 => timeNewY				
-	"Chicago"	 => timeChig	
-	"Londres"	 => timeLond	
+	"NYSE"	 	 => timeNYSE
+	"New York"	 => timeNewY
+	"Chicago"	 => timeChig
+	"Londres"	 => timeLond
 	"Tokyo"		 => timeToky
+	"Shanghai"	 => timeShan
 	"Sydney"	 => timeSydn
 	"Argentina"	 => timeArge
 	=> timeChig	
 
 string switchKillZone = switch optionKillZ
+	"NYSE"	 	 => timeNYSE
 	"New York"	 => timeNewY				
 	"Chicago"	 => timeChig	
 	"Londres"	 => timeLond	
 	"Tokyo"		 => timeToky
+	"Shanghai"	 => timeShan
 	"Sydney"	 => timeSydn
 	"Argentina"	 => timeArge
 	=> timeChig
@@ -618,32 +621,43 @@ if ShowTableInform
 
 //  ═══  Show Open Time  ═══
 
-on_StartsesSydney   	= math.sign(nz(time(timeframe.period, '1800-1801' , switchSession)))
-on_StartsesTokyo    	= math.sign(nz(time(timeframe.period, '1800-1801' , switchSession)))
-on_StartsesLondon   	= math.sign(nz(time(timeframe.period, '0300-0301' , switchSession)))
-on_StartsesNewyork  	= math.sign(nz(time(timeframe.period, '0700-0701' , switchSession)))
-on_StartsesNYSE     	= math.sign(nz(time(timeframe.period, '0830-0831' , switchSession)))
+onStartKillzonesSydney   	= math.sign(nz(time(timeframe.period, '0700-0701' , switchKillZone)))
+onStartKillzonesTokyo    	= math.sign(nz(time(timeframe.period, '0800-0801' , switchKillZone)))
+onStartKillzonesLondon   	= math.sign(nz(time(timeframe.period, '0800-0801' , switchKillZone)))
+onStartKillzonesNewyork  	= math.sign(nz(time(timeframe.period, '0800-0801' , switchKillZone)))
+onStartKillzonesChicago  	= math.sign(nz(time(timeframe.period, '0700-0701' , switchKillZone)))
+onStartKillzonesNYSE     	= math.sign(nz(time(timeframe.period, '0830-0831' , switchKillZone)))
 
 StartLine(Width) =>
     StartLine = line.new(bar_index, open - 1 , bar_index, open + 1 , xloc.bar_index, extend.both, #aeafb196 , line.style_dotted, Width)
     StartLine
 
-if  on_StartsesSydney
-    if sesShowSydney
-        StartLine(2) 
+if  onStartKillzonesSydney
+	if  switchKillZone  == timeSydn
+		if killShowPre
+			StartLine(2) 
     
-if  on_StartsesTokyo
-    if sesShowTokyo
-        StartLine(2) 
+if  onStartKillzonesTokyo
+	if  switchKillZone  == timeToky
+		if killShowPre
+			StartLine(2) 
 
-if  on_StartsesLondon
-    if sesShowLondon
-        StartLine(2) 
+if  onStartKillzonesLondon
+	if  switchKillZone  == timeLond
+		if killShowPre
+			StartLine(2) 
         
-if  on_StartsesNewyork
-    if sesShowNewyork
-        StartLine(2) 
+if  onStartKillzonesNewyork
+	if  switchKillZone  == timeNewY
+		if killShowPre
+			StartLine(2) 
+
+if  onStartKillzonesChicago
+	if  switchKillZone  == timeChig
+		if killShowPre
+			StartLine(2) 
     
-if  on_StartsesNYSE
-    if sesShowNYSE
-        StartLine(2)
+if  onStartKillzonesNYSE
+	if  switchKillZone  == timeNYSE
+		if killShowPre
+			StartLine(2)
