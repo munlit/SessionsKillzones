@@ -2,7 +2,7 @@
 
 ### GUIA
 
-*Repositorio* — (https://github.com/munlit/SessionLite.git)
+*Repositorio* — (https://github.com/munlit/SessionsKillzones.git)
 
 -  Este repositorio esta comprendido por nuestro indicador.
 -  Nos enfocamos en su versatilidad y facil configuración.
@@ -12,11 +12,12 @@
 
 #### Archivo principal
 
-[.Pine: Session & Killzone Lite](https://github.com/munlit/SessionLite/blob/master/src/Session%20Lite.pine)
+[.Pine: Sessions & Killzones](https://github.com/munlit/SessionsKillzones/blob/master/src/Sessions%20Killzones.pine)
 
-*  Solo es necesario copiar el codigo visualizado en RAW
+*  Solo es necesario copiar el codigo visualizado
 *  Pegar en el editor Pine de TradingView
-*  Guardar, nombrar
+*  Guardar
+*  Nombrar
 *  Añadir al gráfico. 
 
 
